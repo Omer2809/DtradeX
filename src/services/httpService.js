@@ -13,7 +13,6 @@ axios.interceptors.response.use(null, (error) => {
   if (!expectedError) {
     logger.log(error);
     toast.error("An unexpected error occurrred.");
-    // toast.warn("Please check your internet connection..");
   }
 
   return Promise.reject(error);

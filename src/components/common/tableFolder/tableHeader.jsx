@@ -1,41 +1,41 @@
 import React, { Component } from "react";
 
 // columns: array
-// sortColumn: object
+// sortcolumn: object
 // onSort: function
 
 class TableHeader extends Component {
-  raiseSort = path => {
-    const sortColumn = { ...this.props.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
-    this.props.onSort(sortColumn);
-  };
+  // raiseSort = path => {
+  //   const sortcolumn = { ...this.props.sortcolumn };
+  //   if (sortcolumn.path === path)
+  //     sortcolumn.order = sortcolumn.order === "asc" ? "desc" : "asc";
+  //   else {
+  //     sortcolumn.path = path;
+  //     sortcolumn.order = "asc";
+  //   }
+  //   this.props.onSort(sortcolumn);
+  // };
 
-  renderSortIcon = column => {
-    const { sortColumn } = this.props;
+  // renderSortIcon = column => {
+  //   const { sortcolumn } = this.props;
 
-    if (column.path !== sortColumn.path) return null;
-    if (sortColumn.order === "asc") return <i className="fa fa-sort-asc" />;
-    return <i className="fa fa-sort-desc" />;
-  };
+  //   if (column.path !== sortcolumn.path) return null;
+  //   if (sortcolumn.order === "asc") return <i className="fa fa-sort-asc" />;
+  //   return <i className="fa fa-sort-desc" />;
+  // };
 
   render() {
     return (
       <thead>
         <tr>
-          {this.props.columns.map(column => (
+          {this.props.columns.map((column) => (
             <th
-              className="clickable"
-              key={column.path || column.key}
-              onClick={() => this.raiseSort(column.path)}
+              // className="clickable"
+              key={column && (column.path || column.key)}
+              // onClick={() => this.raiseSort(column.path)}
             >
-              {column.label}
-              {this.renderSortIcon(column)}
+              {column && column.label}
+              {/* {this.renderSortIcon(column)} */}
             </th>
           ))}
         </tr>

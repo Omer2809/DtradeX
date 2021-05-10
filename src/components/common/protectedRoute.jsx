@@ -1,17 +1,19 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import auth from "../../services/authService";
+import { toast } from "react-toastify";
 
 const ProtectedRoute = ({ path, component: Component, render, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (!auth.getCurrentUser().isAdmin) {
+        if (!auth.getCurrentUser()) {
+          toast.info("Please Login first...");
           return (
             <Redirect
               to={{
-                pathname: "/not-found",
+                pathname: "/login",
                 state: { from: props.location },
               }}
             />

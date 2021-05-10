@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap");
+
+.navbarr {
+  /* background: transparent; */
+  font-family: "Karla", Arial, sans-serif;
+  /* position: sticky; */
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  z-index: 900;
+  overflow: hidden;
+}
+
+.activeIt {
+  /* background-color: #060b26; */
+  /* background-color: #c6f6d5cc; */
+  background-color: #fff;
+  opacity: 0.95;
+  /* border-bottom: #1a83ff solid 2px; */
+}
+
+.NavContainer {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 2rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.cross {
+  margin-left: 2rem;
+}
+/* .menu-bars { */
+/* font-size: 2rem; */
+/* background: none; */
+/* background: #1a83ff; */
+/* background: #5035ff; */
+/* border-radius: 50%; */
+/* color:#060b26; */
+/* } */
+
+.nav-menu {
+  z-index: 1000;
+  /* background-color: #060b26; */
+  background-color: #132c20;
+  width: 250px;
+  height: 100vh;
+  /* display: flex; */
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  /* color: #f5f5f5; */
+  color: #c6f6d5cc;
+  /* color: #2f855a; */
+  font-size: 18px;
+  font-weight: 300;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.icon svg {
+  color: #c6f6d5cc !important;
+}
+.icon:hover svg {
+  /* color: #f5f5f5 !important; */
+  color: #132c20 !important;
+}
+
+/* .icon .NavSpan {
+  color: #132c20;
+} */
+/* .nav-text a:hover .icon {
+  color: #fff;
+} */
+.nav-text a:hover {
+  /* color: #f5f5f5; */
+  color: #132c20;
+  text-decoration: none;
+  /* background-color: #1a83ff; */
+  background-color: #5035ff;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  /* background-color: #060b26; */
+  /* background-color: #c6f6d5cc; */
+  background-color: #132c20;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.NavSpan {
+  margin-left: 16px;
+}
