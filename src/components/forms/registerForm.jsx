@@ -5,7 +5,7 @@ import * as userService from "../../services/userService";
 import auth from "../../services/authService";
 import { Container, FormWrap } from "../styles/FormStyling";
 import { toast } from "react-toastify";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 
 class RegisterForm extends Form {
   state = {

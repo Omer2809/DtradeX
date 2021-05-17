@@ -5,7 +5,7 @@ import Form from "../common/form/form";
 import auth from "../../services/authService";
 import { Container, FormWrap } from "../styles/FormStyling";
 import { toast } from "react-toastify";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 
 class LoginForm extends Form {
   state = {

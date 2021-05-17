@@ -16,7 +16,7 @@ import {
   Button,
   Carousel,
 } from "react-bootstrap";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 
 function getTime(days, startDate) {
   const oneDay = 1000 * 60 * 60 * 24;

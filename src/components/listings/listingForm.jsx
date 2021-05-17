@@ -13,7 +13,7 @@ import {
 } from "../../services/listingService";
 import auth from "../../services/authService";
 
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 import FormContainer from "../forms/formContainer";
 
 function getImageUrl(image) {

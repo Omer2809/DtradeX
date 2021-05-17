@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Pagination, getCurrentPage, getPagedData } from "../common/pagination";
 import FavoritesTable from "./favoritesTable";
 import favoritesApi from "../../services/favoriteService";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 import GlobalContainer from "../common/tableFolder/globalContainer";
 
 import Header from "../common/tableFolder/header";

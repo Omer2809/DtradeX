@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import { Pagination, getCurrentPage, getPagedData } from "../common/pagination";
 import { getMyListings, deleteListing } from "../../services/listingService";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 import GlobalContainer from "../common/tableFolder/globalContainer";
 import ListingsTable from "./listingsTable";
 import Header from "../common/tableFolder/header";

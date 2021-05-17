@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { toast } from "react-toastify";
 
 import messagesApi from "../../services/messageService";
-import Spinner from "../common/spinner";
+import Spinner from "../spinner";
 import FA from "react-fontawesome";
 import "./style.css";
 
