@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../../home/style.css";
+import "../../welcomeHome/style.css";
 import FA from "react-fontawesome";
 
 const OldPictureDisplay = ({ image, onDelete }) => {

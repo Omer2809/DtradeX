@@ -9,7 +9,7 @@ import ProductCarousel from "./productCarousel";
 import SearchBar from "./SearchBar";
 import Card from "./card";
 import Footer from "./footerr";
-import Spinner from "../common/spinner";
+import Spinner from "./spinner";
 
 import "./style.css";
 import { GoTop } from "../styles/Styledgotopbtn";

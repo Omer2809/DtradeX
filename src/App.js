@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css";
 import "./App.css";
 
-import Home from "./components/home/home";
+import Home from "./components/welcomeHome/home";
 import LoginForm from "./components/forms/loginForm";
 import RegisterForm from "./components/forms/registerForm";
 import Navbar from "./components/sidebar/Navbar";
