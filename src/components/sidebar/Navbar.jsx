@@ -6,11 +6,20 @@ import { IconContext } from "react-icons";
 
 import { SidebarDataForStaff, SidebarDataForAdmin } from "./SidebarData";
 import "./Navbar.css";
-import { NavItems, NavItemButton } from "../mystyle/styledNavBar";
-import UploadPictures from "../common/uploadPictures";
+import LOGO from "../common/img/logo.png";
+import { NavItemButton } from "../styles/StyledButtons";
+import UploadPictures from "../common/picture/uploadPictures";
 import * as userService from "../../services/userService";
 import { toast } from "react-toastify";
-import OldPictureDisplay from "../common/oldPictureDisplay";
+import OldPictureDisplay from "../common/picture/oldPictureDisplay";
+import styled from "styled-components";
+
+const NavItems = styled.ul`
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+`;
 
 function Navbar({ user }) {
   const [sidebar, setSidebar] = useState(false);
@@ -28,19 +37,17 @@ function Navbar({ user }) {
   };
 
   useEffect(() => {
-    console.log(user);
     async function fetchData() {
       console.log(user);
       if (user) {
         const { data } = await userService.getUser(user.userId);
         console.log(data);
 
-        if (data.images?.length != 0) {
+        if (data.images?.length !== 0) {
           setUrl(data.images[0].url);
 
           if (count !== 3) setCount(3);
         }
-        console.log(url);
       }
     }
 
@@ -103,22 +110,36 @@ function Navbar({ user }) {
                     className="profile-image rounded-circle mb-3 mr-3"
                   />
                 ) : (
-                  <Link to="#" className="menu-bars rounded-circle p-2">
+                  <Link
+                    to="#"
+                    className="menu-bars rounded-circle p-2 mb-3 ml-xs-4"
+                  >
                     <FaIcons.FaUser
                       onClick={showSidebar}
-                      style={{ color: "#eee", opacity: 0.95, fontSize: 25 }}
+                      style={{
+                        color: "#eee",
+                        background: "#132c20",
+                        opacity: 0.95,
+                        fontSize: 30,
+                        borderRadius: "50%",
+                        padding: 3,
+                      }}
                     />
                   </Link>
                 )}
-                <Link to="/">TWT</Link>
+                <Link to="/" className="logoo">
+                  <img src={LOGO} alt="footerlogo" />
+                </Link>
                 <NavItems>
-                  <NavItemButton to="/listings/new">+ NEW</NavItemButton>
+                  <NavItemButton to="/listings/new">+ Sell</NavItemButton>
                   {/* <NavItemButton to="/logout">Logout</NavItemButton> */}
                 </NavItems>
               </>
             ) : (
               <>
-                <Link to="/">TWT</Link>
+                <Link to="/" className="logoo">
+                  <img src={LOGO} alt="footerlogo" />
+                </Link>
                 <NavItems>
                   <NavItemButton to="/register">Sign Up</NavItemButton>
                   <NavItemButton to="/login">Login</NavItemButton>
@@ -131,14 +152,18 @@ function Navbar({ user }) {
           <ul>
             <li className="navbar-toggle" onClick={showSidebar}>
               <Link to="#" className="menu-bars cross">
-                <AiIcons.AiOutlineClose style={{ fontSize: 30 }} />
+                <AiIcons.AiOutlineClose
+                  style={{ fontSize: 30, color: "#132c20" }}
+                />
               </Link>
             </li>
             <li
               className="navbar-toggle"
               style={{ paddingLeft: 30, marginTop: 20 }}
             >
-              {url !== "" ? (
+              {console.log(url, count)}
+              {/* {url !== "" ? ( */}
+              {url ? (
                 <OldPictureDisplay image={url} onDelete={handleImageDelete} />
               ) : (
                 <UploadPictures
@@ -167,7 +192,6 @@ function Navbar({ user }) {
             })}
             {user && user.isAdmin && (
               <>
-                {" "}
                 {SidebarDataForAdmin.map((item, index) => {
                   return (
                     <li key={index + 6} className={item.cName}>

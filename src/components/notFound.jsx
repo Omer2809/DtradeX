@@ -1,17 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import { NavItemButton } from "./styles/styledButtons";
-// import "./styles/notFound.css";
+import { NavItemButton } from "./styles/StyledButtons";
+import "./styles/notFound.css";
 
 const NotFound = () => {
   return (
     <div className="notFound">
       <h1 className="erro">404</h1>
       <h3 className="below">OPPS! PAGE NOT FOUND</h3>
-      {/* <NavItemButton primary="true" to="/" style={{zIndex:25}}>
+      <NavItemButton primary="true" to="/" style={{ zIndex: 25 }}>
         Back To Home
-      </NavItemButton> */}
-      <Link to="/">Back To Home</Link>
+      </NavItemButton>
     </div>
   );
 };

@@ -1,13 +1,11 @@
 import React from "react";
 import Joi from "joi-browser";
 import { toast } from "react-toastify";
-import axios from "axios";
 
-import Form from "../common/form";
-import { Container, FormWrap } from "../mystyle/LoginFormStyling";
+import Form from "../common/form/form";
 import { getCategories } from "../../services/categoryService";
-import UploadPictures from "../common/uploadPictures";
-import OldPictureDisplay from "../common/oldPictureDisplay";
+import UploadPictures from "../common/picture/uploadPictures";
+import OldPictureDisplay from "../common/picture/oldPictureDisplay";
 import {
   getListing,
   saveListing,
@@ -15,13 +13,11 @@ import {
 } from "../../services/listingService";
 import auth from "../../services/authService";
 
-// import "../styles/styledForm.css";
-import "../mystyle/styledForm.css";
 import Spinner from "../common/spinner";
-import FormContainer from "../common/formContainer";
+import FormContainer from "../forms/formContainer";
 
-function getImageNameString(image) {
-  return image.url.substring(33, image.url.length - 9);
+function getImageUrl(image) {
+  return image.url;
 }
 
 class ListingForm extends Form {
@@ -44,10 +40,7 @@ class ListingForm extends Form {
     errors: {},
     oldImagesCount: 0,
     loading: false,
-    // imageloading: false,
     saving: false,
-    // filename: "",
-    // uploadPercentage: 0,
   };
 
   schema = {
@@ -157,14 +150,13 @@ class ListingForm extends Form {
         data.append("images", image.originFileObj, image.originFileObj.name)
       );
 
-      console.log(data);
       this.setState({ loading: true, saving: true });
 
       if (_id) {
         if (oldImagesCount > 0)
           data.append(
             "oldImages",
-            JSON.stringify(this.state.oldImages.map(getImageNameString))
+            JSON.stringify(this.state.oldImages.map(getImageUrl))
           );
 
         await editListing(data, _id);

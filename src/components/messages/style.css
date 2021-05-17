@@ -1,28 +1,12 @@
-.back-top {
-  background-color: #009688;
-  height: 15vh;
-}
-
-.back-main {
-  background-color: #d9dbd5;
-  min-height: 85vh;
-}
-
-.back-container {
-  position: relative;
-}
-
 .front-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  /* position: absolute; */
+  margin: 80px auto;
 }
 .front-container1 {
-  position: absolute;
-  top: 80px;
+  /* position: absolute; */
+  /* top: 80px;
   left: 0;
-  right: 0;
+  right: 0; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -33,6 +17,7 @@
 
 .profile-image {
   /* margin-top: 7px; */
+  border: 1px solid #333;
   height: 30px;
   width: 30px;
 }
@@ -44,7 +29,7 @@
 
 .contact-table-scroll {
   overflow-y: scroll;
-  height: 600px;
+  min-height: 600px;
 }
 
 .message-area {
@@ -54,12 +39,13 @@
 
 .message-table-scroll {
   overflow-y: scroll;
-  height: 550px;
+  min-height: 550px;
 }
 
 .message-box {
   /* background-color: #F0F0F0; */
   background-color: #999;
+  width: 100%;
 }
 
 .product-top img {
@@ -77,4 +63,31 @@
 
 .product-top img:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+}
+
+.sender-mobile {
+  opacity: 0;
+}
+.sender-web {
+  /* display: none; */
+  font-size: 1.5rem;
+  padding-bottom: 0.2rem;
+}
+@media (max-width: 700px) {
+  .sender-web {
+    /* display: none; */
+    font-size: 0rem !important;
+    margin: 0rem 0rem 0rem;
+    padding: 0rem;
+    opacity: 0;
+    /* visibility: hidden; */
+  }
+  .sender-mobile {
+    opacity: 1;
+  }
+  .message-area,
+  .contacts,
+  .contact-table-scroll {
+    min-height: 10px;
+  }
 }

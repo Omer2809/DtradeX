@@ -4,8 +4,7 @@ import { getListing } from "../../services/listingService";
 import auth from "../../services/authService";
 
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Modal } from "../common/modal";
+import { Modal } from "./modal";
 import { toast } from "react-toastify";
 
 import {
@@ -16,28 +15,14 @@ import {
   Card,
   Button,
   Carousel,
-  Form,
 } from "react-bootstrap";
-import ProductCarousel from "../common/productCarousel";
 import Spinner from "../common/spinner";
-
-// const Button = styled.button`
-//   min-width: 100px;
-//   padding: 16px 32px;
-//   border-radius: 4px;
-//   border: none;
-//   background: #141414;
-//   color: #fff;
-//   font-size: 24px;
-//   cursor: pointer;
-// `;
 
 function getTime(days, startDate) {
   const oneDay = 1000 * 60 * 60 * 24;
   const today = new Date();
   const createdDate = new Date(startDate);
 
-  // console.log();
   return (
     days -
     (Math.round(today.getTime() - createdDate.getTime()) / oneDay).toFixed(0)
@@ -48,7 +33,7 @@ const ListingDetails = (props) => {
   const listingId = props.match.params.id;
   const getListingApi = useApi(getListing);
   const [user, setUser] = useState({});
-  const [bidder, setBidder] = useState("none");
+  const [bidder, setBidder] = useState("owner");
   const [bid, setBid] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const [msg, setMsg] = useState(false);
@@ -56,7 +41,6 @@ const ListingDetails = (props) => {
   useEffect(() => {
     setUser(auth.getCurrentUser());
     getListingApi.request(listingId);
-    // console.log()
   }, []);
 
   const openModal = (msg) => {
@@ -74,18 +58,6 @@ const ListingDetails = (props) => {
     setBidder(newBidder);
   };
 
-  // handleModalShow = (member) => {
-  //   // this.setState({ member, showModal: true });
-  // };
-
-  // closeModalHandler = () => {
-  //   // this.setState({ showModal: false });
-  // };
-
-  // const handleSearch = (query) => {
-  //   setSearchQuery(query);
-  // };
-
   return (
     <>
       {user && (
@@ -98,24 +70,13 @@ const ListingDetails = (props) => {
           user={user}
         />
       )}
-      {console.log(getListingApi.data)}
-      <div className="container" style={{ paddingTop: 70 }}>
+      <div className="container" style={{ paddingTop: 70, paddingBottom: 10 }}>
         {getListing.loading && <Spinner />}
         <Link className="btn btn-light my-3" to="/">
           &lt; Go Back
         </Link>
         <Row>
           <Col md={5}>
-            {/* <Image
-              src={
-                getListingApi.data?.images &&
-                getListingApi.data?.images.length !== 0 &&
-                getListingApi.data?.images[0].url
-              }
-              alt={getListingApi.data.title}
-              fluid
-              // style={{ height: 500 }}
-            /> */}
             <Carousel
               pause="hover"
               className="listing-carousel"
@@ -129,7 +90,7 @@ const ListingDetails = (props) => {
             </Carousel>
           </Col>
           <Col md={3}>
-            <ListGroup variant="flush">
+            <ListGroup variant="flush" className="details-box">
               <ListGroup.Item>
                 <h3>{getListingApi.data.title}</h3>
               </ListGroup.Item>
@@ -144,17 +105,21 @@ const ListingDetails = (props) => {
                   <Button
                     className="btn-block"
                     type="button"
-                    onClick={() => openModal(false)}
+                    onClick={() => {
+                      if (!user?.userId)
+                        return toast.info("Please login to add bid ....");
+                      openModal(false);
+                    }}
                   >
                     Add Bit
                   </Button>
                 </ListGroup.Item>
-              )}{" "}
+              )}
             </ListGroup>
           </Col>
           <Col md={4}>
-            <Card>
-              <ListGroup variant="flush">
+            <Card className="details-box-right">
+              <ListGroup variant="flush" className="details-box">
                 <ListGroup.Item>
                   <Row>
                     <Col>Bidding:</Col>
@@ -189,9 +154,10 @@ const ListingDetails = (props) => {
                       <Row>
                         <Col>Highest Bidder:</Col>
                         <Col>
-                          {getListingApi.data.bidder
-                            ? getListingApi.data.bidder
-                            : bidder}
+                          {getListingApi.data.bidder === "none" ||
+                          getListingApi.data.bidder === null
+                            ? bidder
+                            : getListingApi.data.bidder}
                         </Col>
                       </Row>
                     </ListGroup.Item>
@@ -210,7 +176,14 @@ const ListingDetails = (props) => {
                       getListingApi.data.days,
                       getListingApi.data.createdAt
                     ) <= 0 ? (
-                      <Col>SOLD ({getListingApi.data.bidder})won</Col>
+                      <Col>
+                        SOLD (
+                        {getListingApi.data.bidder === "none" ||
+                        getListingApi.data.bidder === null
+                          ? bidder
+                          : getListingApi.data.bidder}
+                        )
+                      </Col>
                     ) : (
                       <Col>In Stock</Col>
                     )}
@@ -221,7 +194,13 @@ const ListingDetails = (props) => {
                   <Button
                     className="btn-block"
                     type="button"
-                    onClick={() => openModal(true)}
+                    onClick={() => {
+                      if (!user?.userId)
+                        return toast.info(
+                          "Please login to contact the seller...."
+                        );
+                      openModal(true);
+                    }}
                   >
                     Contact Seller
                   </Button>
@@ -234,117 +213,5 @@ const ListingDetails = (props) => {
     </>
   );
 };
-
-//   return (
-//     <>
-//       {user && (
-//         <Modal
-//           showModal={showModal}
-//           setShowModal={setShowModal}
-//           listing={getListingApi.data}
-//           msg={msg}
-//           update={update}
-//           user={user}
-//         />
-//       )}
-//       <section className="single-product">
-//         <div className="container">
-//           <div className="row">
-//             <div className="col-md-5">
-//               {/* <ProductCarousel products={getListingApi.data}/> */}
-//             </div>
-
-//             <div className="col-md-7">
-//               <p className="new-arrival text-center">NEW</p>
-//               <h2>{getListingApi.data.title} - Blue Color</h2>
-//               <p>Product Code: IRSC2019</p>
-
-//               {/* <p className="price">{getListingApi.data.price}</p> */}
-//               <p>
-//                 <b>
-//                   {getListingApi.data.bidding === "Yes"
-//                     ? "Highest Bid :"
-//                     : "Price"}
-//                 </b>{" "}
-//                 Rs.{bid === 0 ? getListingApi.data.price : bid}
-//               </p>
-//               {getListingApi.data.bidding === "Yes" && (
-//                 <>
-//                   {getTime(
-//                     getListingApi.data.days,
-//                     getListingApi.data.createdAt
-//                   ) <= 0 && (
-//                     <p style={{ fontSize: 50 }}>
-//                       SOLD {getListingApi.data.bidder}Omer won
-//                     </p>
-//                   )}
-//                   <p>
-//                     <b>Highest Bidder:</b>
-//                     {bidder === "none" ? getListingApi.data.bidder : bidder}
-//                   </p>
-//                   <p style={{ fontSize: 14 }}>
-//                     <b>
-//                       {" "}
-//                       {getTime(
-//                         getListingApi.data.days,
-//                         getListingApi.data.createdAt
-//                       )}{" "}
-//                       days left
-//                     </b>
-//                   </p>{" "}
-//                 </>
-//               )}
-
-//               {console.log(getListingApi.data.bidding)}
-//               {console.log(user)}
-
-//               {/* <ContactSellerForm listing={listing} btnName="Contact  Seller" /> */}
-//               {/* {getListingApi.data.added_by &&
-//                 (!user || user.userId !== getListingApi.data.added_by._id) && (
-//                   <>
-//
-
-//                     <button
-//                       type="button"
-//                       className="btn btn-primary"
-//                       onClick={() => openModal(true)}
-//                     >
-//                       Contact Seller
-//                     </button>
-//                   </>
-//                 )} */}
-//               <button
-//                 type="button"
-//                 className="btn btn-primary"
-//                 onClick={() => openModal(true)}
-//               >
-//                 Contact Seller
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-
-//       <section className="product-description">
-//         <div className="container">
-//           <h6>Product Description</h6>
-//           <p>{getListingApi.data.description}</p>
-//           <p>
-//             Subscribe Easy Tutorial YouTube Channel to watch more videos and
-//             press the bell icon to get immediate notofications Subscribe Easy
-//             Tutorial YouTube Channel to watch more videos and press the bell
-//             icon to get immediate notofications Subscribe Easy Tutorial YouTube
-//             Channel to watch more videos and press the bell icon to get
-//             immediate notofications Subscribe Easy Tutorial YouTube Channel to
-//             watch more videos and press the bell icon to get immediate
-//             notofications{" "}
-//           </p>
-
-//           <hr />
-//         </div>{" "}
-//       </section>
-//     </>
-//   );
-// };
 
 export default ListingDetails;

@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 
-// import { GlobalContainer } from "./common";
 import { Pagination, getCurrentPage, getPagedData } from "../common/pagination";
 import { getMyListings, deleteListing } from "../../services/listingService";
 import Spinner from "../common/spinner";
-import GlobalContainer from "../common/globalContainer";
+import GlobalContainer from "../common/tableFolder/globalContainer";
 import ListingsTable from "./listingsTable";
-import Header from "../common/header";
-// import { Header } from "antd/lib/layout/layout";
-// import { getLocalData, setLocalData } from "../common/localStorage";
-// import "../styles/styledTable.css";
-// import { Modal } from "../modal";
+import Header from "../common/tableFolder/header";
 
 class MyListings extends Component {
   state = {
@@ -61,14 +56,6 @@ class MyListings extends Component {
   handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
-
-  // handleModalShow = (member) => {
-  //   this.setState({ member, showModal: true });
-  // };
-
-  // closeModalHandler = () => {
-  //   this.setState({ showModal: false });
-  // };
 
   render() {
     const path = this.props.location.pathname;

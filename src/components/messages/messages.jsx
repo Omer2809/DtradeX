@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 
-// import { GlobalContainer } from "./common";
 import messagesApi from "../../services/messageService";
 import Spinner from "../common/spinner";
-import GlobalContainer from "../common/globalContainer";
 import FA from "react-fontawesome";
 import "./style.css";
 
 import noimage from "./noimage.png";
-import ContactSellerForm from "../contactSellerForm";
+import ContactSellerForm from "../forms/contactSellerForm";
 import { Link } from "react-router-dom";
 import { getUser } from "../../services/userService";
 
@@ -58,18 +56,18 @@ class Messages extends Component {
     this.setState({ loading: true });
     const { data: messages } = await messagesApi.getMyMessages();
     let url = "";
-    console.log(this.props.user);
+
     const { user } = this.props;
 
     const { data: profile } = await getUser(user.userId);
 
-    if (profile.images?.length != 0) url = profile.images[0].url;
+    if (profile.images?.length !== 0) url = profile.images[0].url;
 
-    const chats = getChats(messages).filter(
-      (c) => c.participants.filter((u) => u.name === user.name).length != 0
+    const chats = getChats(
+      messages.filter(
+        (c) => c.participants.filter((u) => u.name === user.name).length !== 0
+      )
     );
-
-    // const chats = getChats(messages);
 
     this.setState({
       chats,
@@ -78,7 +76,7 @@ class Messages extends Component {
       loading: false,
     });
 
-    if (chats.length != 0) this.setChat(chats[0]);
+    if (chats.length !== 0) this.setChat(chats[0]);
 
     console.log(this.state);
   }
@@ -101,12 +99,6 @@ class Messages extends Component {
   };
 
   handleMessageDelete = async (message, yours) => {
-    // if (
-    //   message.fromUser._id === this.state.user?.userId &&
-    //   !window.confirm("are u sure u want to delete this from everyone?")
-    // )
-    //   return;
-
     const originalMessages = this.state.messages;
     const messages = originalMessages.filter((m) => m._id !== message._id);
 
@@ -137,12 +129,17 @@ class Messages extends Component {
       loading: true,
     });
 
-    const { data: messages } = await messagesApi.getChat(
+    const { data } = await messagesApi.getChat(
       message.toUser._id,
       message.fromUser._id,
       message.listing._id
     );
 
+    const messages = data.filter(
+      (c) =>
+        c.participants.filter((u) => u.name === this.props.user.name).length !==
+        0
+    );
     console.log("mesg clicked:", messages);
 
     this.setState({
@@ -154,25 +151,11 @@ class Messages extends Component {
   };
 
   render() {
-    const path = this.props.location.pathname;
-
-    let {
-      pageSize,
-      currentPage,
-      numberOfPageButtons,
-      // sortColumn,
-      loading,
-      user,
-      fromUser,
-      messages,
-      chats,
-      listing,
-      url,
-    } = this.state;
+    let { loading, user, fromUser, messages, chats, listing, url } = this.state;
 
     return (
-      <div>
-        <div className="container front-container1">
+      <div className="pt-5 pb-5">
+        <div className="container front-container1  mb-3 mt-4">
           <div className="row chat-top">
             <div className="d-flex col-sm-4 border-right border-secondary pt-3">
               <img
@@ -184,13 +167,16 @@ class Messages extends Component {
               {console.log(user)}
             </div>
 
-            <div className="col-sm-8 d-flex pt-3">
+            <div className="col-sm-8 d-flex pt-3 sender-web">
               <img
                 src={getImageUrl(fromUser) || noimage}
                 alt=""
                 className="profile-image rounded-circle mr-2"
               />
-              <h4> {fromUser?.name || "Contact Details"}</h4>
+              <div>
+                {fromUser?.name || "Contact Details"}
+                {"  "} ({fromUser?.email})
+              </div>
             </div>
           </div>
           {/* {loading && <Spinner />} */}
@@ -220,8 +206,6 @@ class Messages extends Component {
                           onClick={() => this.setChat(message)}
                         >
                           {message.fromUser.name}
-                          {/* <br />{" "} */}
-                          {/* <small>{message.content.substring(0, 15)}...</small> */}
                         </td>
                         <td>
                           <small>
@@ -245,8 +229,8 @@ class Messages extends Component {
                                 )
                               ) {
                                 this.handleChatDelete(
-                                  message,
-                                  message.fromUser._id === user?.userId
+                                  message
+                                  // message.fromUser._id === user?.userId
                                 );
                               }
                             }}
@@ -267,25 +251,36 @@ class Messages extends Component {
                   {loading ? (
                     <Spinner />
                   ) : (
-                    <tbody>
-                      <tr>
-                        <td
-                          className="d-flex product-top border-bottom-2 border-dashed border-dark m-2 mr-5"
-                          style={{ borderBotttom: "2", border: "dashed" }}
-                        >
-                          <Link to={`/listing/details/${listing._id}`}>
-                            <img
-                              src={getImageUrl(listing)}
-                              style={{ height: 135, width: 100 }}
-                            />
-                          </Link>
-                          <div className="p-3">
-                            <h5>Title: {listing?.title}</h5>
-                            <h5>Price: Rs.{listing?.price}</h5>
-                            <h5>Description: {listing?.description}</h5>
-                          </div>
-                        </td>
+                    <tbody className="sender-mobile-t">
+                      <tr className="sender-mobile col-sm-8 d-flex pt-3 ">
+                        <img
+                          src={getImageUrl(fromUser) || noimage}
+                          alt=""
+                          className="profile-image rounded-circle mr-2"
+                        />
+                        <tr> {fromUser?.name || "Contact Details"}</tr>
                       </tr>
+                      {chats.length !== 0 && (
+                        <tr>
+                          <td
+                            className="d-flex product-top border-bottom-2 border-dashed border-dark m-2 mr-5"
+                            style={{ borderBotttom: "2", border: "dashed" }}
+                          >
+                            <Link to={`/listing/details/${listing._id}`}>
+                              <img
+                                src={getImageUrl(listing)}
+                                style={{ height: 135, width: 100 }}
+                                alt="product"
+                              />
+                            </Link>
+                            <div className="p-3">
+                              <h5>Title: {listing?.title}</h5>
+                              <h5>Price: Rs.{listing?.price}</h5>
+                              <h5>Description: {listing?.description}</h5>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
                       <tr className="text-center font-italic">
                         <td>Messages</td>{" "}
                       </tr>
@@ -311,18 +306,13 @@ class Messages extends Component {
                               {message.content}
                             </p>
                           </td>
-                          {/* <td>
-                            <p className="p-1 mt-2 mr-3 shadow-sm">
-                              <small>11:20 PM{message.createdAt}</small>
-                            </p>
-                          </td> */}
                         </tr>
                       ))}
                     </tbody>
                   )}
                 </table>
               </div>
-              <div className="row text-center pl-3 message-box">
+              <div className="row text-center pl-5 message-box mb-2">
                 {/* <div className="col-sm-2 mt-2"> */}
                 <ContactSellerForm
                   listing={listing}

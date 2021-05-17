@@ -6,9 +6,11 @@ import { Pagination, getCurrentPage, getPagedData } from "../common/pagination";
 import FavoritesTable from "./favoritesTable";
 import favoritesApi from "../../services/favoriteService";
 import Spinner from "../common/spinner";
-import GlobalContainer from "../common/globalContainer";
+import GlobalContainer from "../common/tableFolder/globalContainer";
 
-import Header from "../common/header";
+import Header from "../common/tableFolder/header";
+
+
 class Favorites extends Component {
   state = {
     favorites: [],
