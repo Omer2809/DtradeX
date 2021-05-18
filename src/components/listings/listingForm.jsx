@@ -45,7 +45,7 @@ class ListingForm extends Form {
 
   schema = {
     _id: Joi.string(),
-    title: Joi.string().required().min(1).label("Title"),
+    title: Joi.string().required().min(1).max(50).label("Title"),
     price: Joi.number().required().min(1).max(100000).label("Price"),
     days: Joi.number().label("No of days"),
     description: Joi.string().required().max(300).label("Description"),
