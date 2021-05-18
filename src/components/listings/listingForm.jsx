@@ -48,7 +48,7 @@ class ListingForm extends Form {
     title: Joi.string().required().min(1).label("Title"),
     price: Joi.number().required().min(1).max(100000).label("Price"),
     days: Joi.number().label("No of days"),
-    description: Joi.string().required().label("Description"),
+    description: Joi.string().required().max(300).label("Description"),
     categoryId: Joi.string().required().label("Category"),
     bidding: Joi.string().required().label("Bidding"),
   };
@@ -173,7 +173,7 @@ class ListingForm extends Form {
         toast.warn(ex.response.data);
       }
       toast.warn(ex);
-      //   this.setState({ loading: false, saving: false });
+      this.setState({ loading: false, saving: false });
     }
   };
 
