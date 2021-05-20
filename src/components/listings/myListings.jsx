@@ -23,7 +23,7 @@ class MyListings extends Component {
   async componentDidMount() {
     this.setState({ loading: true });
     const { data: listings } = await getMyListings();
-    console.log(listings);
+    // console.log(listings);
     this.setState({ listings, loading: false });
   }
 

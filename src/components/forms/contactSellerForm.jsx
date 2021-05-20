@@ -28,7 +28,7 @@ class ContactSellerForm extends Form {
       } = this.props;
       const { data } = this.state;
 
-      console.log("in msg from", data);
+      // console.log("in msg from", data);
       // console.log("in msg from",data.message.trim.length);
 
       if (data.message.trim().length === 0)
@@ -42,7 +42,7 @@ class ContactSellerForm extends Form {
         toUserId,
         user.userId
       );
-      console.log("in msg", user, result);
+      // console.log("in msg", user, result);
 
       this.setState({ data: { message: "" } });
 

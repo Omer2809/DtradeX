@@ -26,7 +26,7 @@ class UploadPictures extends Component {
   };
 
   handleCancel = () => {
-    console.log("cancel");
+    // console.log("cancel");
     return this.setState({ previewVisible: false });
   };
   //Image Preview
@@ -46,7 +46,7 @@ class UploadPictures extends Component {
   handleChange = ({ fileList }) => {
     this.props.uploadImages(fileList);
 
-    console.log(fileList);
+    // console.log(fileList);
     // this.props.setProfileImage(fileList);
 
     this.setState({ fileList });

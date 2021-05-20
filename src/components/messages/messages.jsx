@@ -78,7 +78,7 @@ class Messages extends Component {
 
     if (chats.length !== 0) this.setChat(chats[0]);
 
-    console.log(this.state);
+    // console.log(this.state);
   }
 
   handleChatDelete = async (chat) => {
@@ -119,12 +119,12 @@ class Messages extends Component {
     const originalMessages = this.state.messages;
     const messages = [...originalMessages, msg];
 
-    console.log("in update mee:", originalMessages, messages);
+    // console.log("in update mee:", originalMessages, messages);
     this.setState({ messages });
   };
 
   setChat = async (message) => {
-    console.log("mesg clicked:", message);
+    // console.log("mesg clicked:", message);
     this.setState({
       loading: true,
     });
@@ -140,7 +140,7 @@ class Messages extends Component {
         c.participants.filter((u) => u.name === this.props.user.name).length !==
         0
     );
-    console.log("mesg clicked:", messages);
+    // console.log("mesg clicked:", messages);
 
     this.setState({
       fromUser: message.fromUser,
@@ -164,7 +164,7 @@ class Messages extends Component {
                 className="profile-image rounded-circle mb-3 mr-3"
               />
               <h3>{user?.name}</h3>
-              {console.log(user)}
+              {/* {console.log(user)} */}
             </div>
 
             <div className="col-sm-8 d-flex pt-3 sender-web">
@@ -275,7 +275,7 @@ class Messages extends Component {
                             </Link>
                             <div className="p-3">
                               <h5>Title: {listing?.title}</h5>
-                              <h5>Price: Rs.{listing?.price}</h5>
+                              <h5>Price: &#8377;{listing?.price}</h5>
                               <h5>Description: {listing?.description}</h5>
                             </div>
                           </td>

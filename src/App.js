@@ -51,10 +51,7 @@ class App extends Component {
             <Route path="/login" component={LoginForm} />
             <Route path="/register" component={RegisterForm} />
             <ProtectedRoute path="/my-listings" component={MyListings} />
-            <ProtectedRoute
-              path="/messages"
-              render={(props) => <Messages {...props} user={user} />}
-            />
+            <ProtectedRoute path="/messages"  render={(props) => <Messages {...props} user={user} />}  />
             <ProtectedRoute path="/favorites" component={Favorites} />
             <ProtectedRoute path="/listings/:id" component={ListingForm} />
             <Route path="/listing/details/:id" component={ListingDetails} />

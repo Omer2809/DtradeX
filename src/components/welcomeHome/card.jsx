@@ -59,7 +59,7 @@ const Card = ({ listing, userId }) => {
           }}
         >
           <div>{listing.title}</div>
-          <div>Rs.{listing.price}</div>
+          <div> &#8377; {listing.price}</div>
         </div>
       </div>
       <div className="overlay">

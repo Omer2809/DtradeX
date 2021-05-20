@@ -29,8 +29,8 @@ const Home = () => {
     setUser(auth.getCurrentUser());
     getListingsApi.request();
 
-    console.log(getListingsApi.data, products);
-    if (getListingsApi.data?.length != 0) {
+    // console.log(getListingsApi.data, products);
+    if (getListingsApi.data?.length !== 0) {
       localStorage.setItem(
         "localProducts",
         JSON.stringify(getListingsApi.data.slice(0, 10))
@@ -41,7 +41,7 @@ const Home = () => {
   }, [getListingsApi.data?.length]);
 
   const canShow = (product, query) => {
-    console.log(product, query);
+    // console.log(product, query);
     return (
       query === "" ||
       product?.price?.toString()?.startsWith(query) ||
@@ -56,7 +56,7 @@ const Home = () => {
         <div id="gotop">
           <SearchBar callback={setSearchQuery} />
         </div>
-        {console.log(getListingsApi.data, products)}
+        {/* {console.log(getListingsApi.data, products)} */}
         <GoTop to="gotop">
           <FontAwesome className="fa-arrow-up fa-2x" name="arrow" />
         </GoTop>

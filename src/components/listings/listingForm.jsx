@@ -45,8 +45,8 @@ class ListingForm extends Form {
 
   schema = {
     _id: Joi.string(),
-    title: Joi.string().required().min(1).max(50).label("Title"),
-    price: Joi.number().required().min(1).max(100000).label("Price"),
+    title: Joi.string().required().min(2).max(25).label("Title"),
+    price: Joi.number().required().min(2).max(100000).label("Price"),
     days: Joi.number().label("No of days"),
     description: Joi.string().required().max(300).label("Description"),
     categoryId: Joi.string().required().label("Category"),
@@ -82,7 +82,7 @@ class ListingForm extends Form {
 
       this.setState({ loading: true });
       const { data: listing } = await getListing(listingId);
-      console.log(listing.images);
+      // console.log(listing.images);
       this.setState({
         data: this.mapToViewModel(listing),
         oldImages: listing.images,
@@ -179,7 +179,7 @@ class ListingForm extends Form {
 
   setImages = (images) => {
     this.setState({ images });
-    console.log("images", this.state.images);
+    // console.log("images", this.state.images);
   };
 
   handleImageDelete = (image) => {

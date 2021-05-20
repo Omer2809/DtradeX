@@ -95,10 +95,10 @@ const ListingDetails = (props) => {
                 <h3>{getListingApi.data.title}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                Price: Rs. {getListingApi.data.price}
+                Price:{" "} <strong>&#8377; {getListingApi.data.price}</strong>
               </ListGroup.Item>
               <ListGroup.Item>
-                Description: {getListingApi.data.description}
+                Description: <strong>{getListingApi.data.description}</strong>
               </ListGroup.Item>
               {getListingApi.data.bidding === "Yes" && (
                 <ListGroup.Item>
@@ -125,7 +125,6 @@ const ListingDetails = (props) => {
                     <Col>Bidding:</Col>
                     <Col>
                       <strong>
-                        {" "}
                         {getListingApi.data.bidding === "Yes"
                           ? "Available"
                           : "Not Available"}
@@ -142,7 +141,7 @@ const ListingDetails = (props) => {
                     </Col>
                     <Col>
                       <strong>
-                        Rs.{bid === 0 ? getListingApi.data.price : bid}
+                        &#8377; {bid === 0 ? getListingApi.data.price : bid}
                       </strong>
                     </Col>
                   </Row>
@@ -154,17 +153,21 @@ const ListingDetails = (props) => {
                       <Row>
                         <Col>Highest Bidder:</Col>
                         <Col>
-                          {getListingApi.data.bidder === "none" ||
-                          getListingApi.data.bidder === null
-                            ? bidder
-                            : getListingApi.data.bidder}
+                          <strong>
+                            {getListingApi.data.bidder === "none" ||
+                            getListingApi.data.bidder === null
+                              ? bidder
+                              : getListingApi.data.bidder}{" "}
+                          </strong>
                         </Col>
                       </Row>
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <Row>
                         <Col>Time Left:</Col>
-                        <Col>{getListingApi.data.days} Days</Col>
+                        <Col>
+                          <strong>{getListingApi.data.days} Days </strong>
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                   </>
@@ -172,21 +175,23 @@ const ListingDetails = (props) => {
                 <ListGroup.Item>
                   <Row>
                     <Col>Status:</Col>
-                    {getTime(
-                      getListingApi.data.days,
-                      getListingApi.data.createdAt
-                    ) <= 0 ? (
-                      <Col>
-                        SOLD (
-                        {getListingApi.data.bidder === "none" ||
-                        getListingApi.data.bidder === null
-                          ? bidder
-                          : getListingApi.data.bidder}
-                        )
-                      </Col>
-                    ) : (
-                      <Col>In Stock</Col>
-                    )}
+                    <Col>
+                      {getTime(
+                        getListingApi.data.days,
+                        getListingApi.data.createdAt
+                      ) <= 0 ? (
+                        <strong>
+                          SOLD (
+                          {getListingApi.data.bidder === "none" ||
+                          getListingApi.data.bidder === null
+                            ? bidder
+                            : getListingApi.data.bidder}
+                          ){" "}
+                        </strong>
+                      ) : (
+                        <strong>In Stock </strong>
+                      )}
+                    </Col>
                   </Row>
                 </ListGroup.Item>
 

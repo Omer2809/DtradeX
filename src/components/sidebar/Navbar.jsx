@@ -38,10 +38,10 @@ function Navbar({ user }) {
 
   useEffect(() => {
     async function fetchData() {
-      console.log(user);
+      // console.log(user);
       if (user) {
         const { data } = await userService.getUser(user.userId);
-        console.log(data);
+        // console.log(data);
 
         if (data.images?.length !== 0) {
           setUrl(data.images[0].url);
