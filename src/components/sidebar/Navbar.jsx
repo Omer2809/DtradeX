@@ -161,7 +161,7 @@ function Navbar({ user }) {
               className="navbar-toggle"
               style={{ paddingLeft: 30, marginTop: 20 }}
             >
-              {console.log(url, count)}
+              {/* {console.log(url, count)} */}
               {/* {url !== "" ? ( */}
               {url ? (
                 <OldPictureDisplay image={url} onDelete={handleImageDelete} />

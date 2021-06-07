@@ -32,15 +32,13 @@ const ShowcaseContainer = styled.div`
   width: 100%;
 `;
 
-class App extends Component {
-  state = {};
+function App() {
+  const [user,setUser]=useState({});
 
-  componentDidMount() {
-    const user = auth.getCurrentUser();
-    this.setState({ user });
-  }
-  render() {
-    const { user } = this.state;
+  useEffect(() => {
+    setUser(auth.getCurrentUser());
+  }, [])
+  
     return (
       <>
         <ShowcaseContainer>
@@ -63,7 +61,7 @@ class App extends Component {
         </ShowcaseContainer>
       </>
     );
-  }
 }
+
 
 export default App;
