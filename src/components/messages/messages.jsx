@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 
-import messagesApi from "../../services/messageService";
-import Spinner from "../spinner";
 import FA from "react-fontawesome";
-import "./style.css";
+import { Link } from "react-router-dom";
+
+import messagesApi from "../../services/messageService";
+import { getUser } from "../../services/userService";
+import auth from "../../services/authService";
+
+import Spinner from "../spinner";
+import ContactSellerForm from "../forms/contactSellerForm";
 
 import noimage from "./noimage.png";
-import ContactSellerForm from "../forms/contactSellerForm";
-import { Link } from "react-router-dom";
-import { getUser } from "../../services/userService";
+import "./style.css";
 
 function getChats(messages) {
   return messages.reduce((acc, curr) => {
@@ -34,6 +37,7 @@ function getClasses(msg) {
 
   return classes;
 }
+
 function getImageUrl(entity) {
   return entity?.images && entity.images.length !== 0 && entity.images[0].url;
 }
@@ -57,9 +61,11 @@ class Messages extends Component {
     const { data: messages } = await messagesApi.getMyMessages();
     let url = "";
 
-    const { user } = this.props;
+    // const { user } = this.props;
+    const user  = auth.getCurrentUser();
 
-    const { data: profile } = await getUser(user.userId);
+   
+     const { data: profile } = user && await getUser(user.userId);
 
     if (profile.images?.length !== 0) url = profile.images[0].url;
 
@@ -137,7 +143,7 @@ class Messages extends Component {
 
     const messages = data.filter(
       (c) =>
-        c.participants.filter((u) => u.name === this.props.user.name).length !==
+        c.participants.filter((u) => u.name === this.props.user?.name).length !==
         0
     );
     // console.log("mesg clicked:", messages);

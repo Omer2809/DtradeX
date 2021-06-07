@@ -3,22 +3,26 @@ import FontAwesome from "react-fontawesome";
 
 import auth from "../../services/authService";
 import { getListings } from "../../services/listingService";
-import useApi from "../hooks/useApi";
+import { getCategories } from "../../services/categoryService";
 
 import ProductCarousel from "./productCarousel";
 import SearchBar from "./SearchBar";
 import Card from "./card";
 import Footer from "./footerr";
 import Spinner from "./spinner";
+import LoadMoreButton from "./loadmorebtn";
+import Filter from "./filter";
 
 import "./style.css";
 import { GoTop } from "../styles/Styledgotopbtn";
 
 const Home = () => {
-  const getListingsApi = useApi(getListings);
-  const [searchQuery, setSearchQuery] = useState("");
   const [user, setUser] = useState({});
-  const [visible, setVisible] = useState(8);
+  const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [visible, setVisible] = useState(12);
+  const [loading, setLoading] = useState(false);
+  const [categoryId, setCategoryId] = useState(null);
 
   const [products, setProducts] = useState(() => {
     const localData = localStorage.getItem("localProducts");
@@ -27,64 +31,77 @@ const Home = () => {
 
   useEffect(() => {
     setUser(auth.getCurrentUser());
-    getListingsApi.request();
 
-    // console.log(getListingsApi.data, products);
-    if (getListingsApi.data?.length !== 0) {
+    async function fetchData() {
+      setLoading(true);
+      const { data: listings } = await getListings();
+      setProducts(listings);
+      setLoading(false);
+
+      const { data } = await getCategories();
+      setCategories(data);
+
       localStorage.setItem(
         "localProducts",
-        JSON.stringify(getListingsApi.data.slice(0, 10))
+        JSON.stringify(listings?.slice(0, 10))
       );
-      setProducts(getListingsApi.data);
     }
-    
-  }, [getListingsApi.data?.length]);
 
-  const canShow = (product, query) => {
-    // console.log(product, query);
+    fetchData();
+  }, []);
+
+  const canShow = (product, query, catId) => {
     return (
-      query === "" ||
-      product?.price?.toString()?.startsWith(query) ||
-      product?.title?.toLowerCase().startsWith(query.toLowerCase())
+      (query === "" ||
+        product?.price?.toString()?.startsWith(query) ||
+        product?.title?.toLowerCase().startsWith(query.toLowerCase())) &&
+      ( product?.categoryId._id === catId || 
+        catId===null ||
+         catId==="" )
     );
   };
 
   return (
     <section className="new-products" style={{ paddingTop: 80 }}>
       <div className="container">
-        <ProductCarousel products={products.slice(0, 4)} />
-        <div id="gotop">
-          <SearchBar callback={setSearchQuery} />
-        </div>
-        {/* {console.log(getListingsApi.data, products)} */}
-        <GoTop to="gotop">
-          <FontAwesome className="fa-arrow-up fa-2x" name="arrow" />
-        </GoTop>
-        <div className="title-box" style={{ marginTop: 20 }}>
-          <h2>New Arrivals</h2>
-        </div>
-        {getListingsApi.loading && <Spinner />}
+        {products.length !== 0 && (
+          <>
+            <ProductCarousel products={products.slice(0, 4)} />
+
+            <div id="gotop">
+              <SearchBar callback={setSearchQuery} />
+              <Filter
+                options={categories}
+                onChangeId={(id) => setCategoryId(id)}
+              />
+            </div>
+            {console.log(categoryId)}
+
+            <GoTop to="gotop">
+              <FontAwesome className="fa-arrow-up fa-2x" name="arrow" />
+            </GoTop>
+
+            <div className="title-box" style={{ marginTop: 20 }}>
+              <h2>New Arrivals</h2>
+            </div>
+          </>
+        )}
+
         <div className="listings" style={{ paddingBottom: 10 }}>
-          {getListingsApi.data?.length !== 0 &&
-            getListingsApi.data
+          {products.length !== 0 &&
+            products
               .filter((product) => {
-                if (canShow(product, searchQuery)) return product;
+                if (canShow(product, searchQuery, categoryId)) return product;
               })
               .slice(0, visible)
               .map((listing, index) => (
                 <Card key={index} listing={listing} userId={user?.userId} />
               ))}
         </div>
-        {visible < getListingsApi.data?.length && (
-          <div className="text-center mt-5 mb-5">
-            <button
-              onClick={() => setVisible(visible + 8)}
-              className="btn  load-more"
-              style={{ background: "#136e32", color: "#ddd" }}
-            >
-              Load More
-            </button>
-          </div>
+
+        {loading && <Spinner />}
+        {visible < products.length && (
+          <LoadMoreButton loadMore={() => setVisible(visible + 8)} />
         )}
       </div>
       <Footer user={user} />

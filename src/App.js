@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
@@ -25,43 +25,49 @@ import auth from "./services/authService";
 import ProtectedRoute from "./components/common/protectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
 
+import backgroundImage from "./images/bg1.png";
+
 const ShowcaseContainer = styled.div`
-  background: #c6f6d5cc;
-  position: relative;
+  /* background: #c6f6d5cc; */
+  background: url(${backgroundImage}) no-repeat ;
+  background-size:cover;
   min-height: 100vh;
   width: 100%;
+
 `;
 
 function App() {
-  const [user,setUser]=useState({});
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     setUser(auth.getCurrentUser());
-  }, [])
-  
-    return (
-      <>
-        <ShowcaseContainer>
-          <ScrollToTop />
-          <ToastContainer />
-          <Navbar user={user} />
-          <Switch>
-            <Route path="/login" component={LoginForm} />
-            <Route path="/register" component={RegisterForm} />
-            <ProtectedRoute path="/my-listings" component={MyListings} />
-            <ProtectedRoute path="/messages"  render={(props) => <Messages {...props} user={user} />}  />
-            <ProtectedRoute path="/favorites" component={Favorites} />
-            <ProtectedRoute path="/listings/:id" component={ListingForm} />
-            <Route path="/listing/details/:id" component={ListingDetails} />
-            <Route path="/not-found" component={NotFound} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/" component={Home} exact />
-            <Redirect to="/not-found" />
-          </Switch>
-        </ShowcaseContainer>
-      </>
-    );
-}
+  }, []);
 
+  return (
+    <>
+      <ShowcaseContainer>
+        <ScrollToTop />
+        <ToastContainer />
+        <Navbar user={user} />
+        <Switch>
+          <Route path="/login" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
+          <ProtectedRoute path="/my-listings" component={MyListings} />
+          <ProtectedRoute
+            path="/messages"
+            render={(props) => <Messages {...props} user={user} />}
+          />
+          <ProtectedRoute path="/favorites" component={Favorites} />
+          <ProtectedRoute path="/listings/:id" component={ListingForm} />
+          <Route path="/listing/details/:id" component={ListingDetails} />
+          <Route path="/not-found" component={NotFound} />
+          <Route path="/logout" component={Logout} />
+          <Route path="/" component={Home} exact />
+          <Redirect to="/not-found" />
+        </Switch>
+      </ShowcaseContainer>
+    </>
+  );
+}
 
 export default App;

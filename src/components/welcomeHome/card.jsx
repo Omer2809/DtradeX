@@ -44,7 +44,7 @@ const Card = ({ listing, userId }) => {
       <div className="cardd">
         <Link to={`/listing/details/${listing._id}`}>
           <img
-            src={listing?.images[0]?.url}
+            src={listing?.images &&listing?.images[0]?.url}
             style={{ height: 200, borderBottom: 2 }}
             alt="product"
           />

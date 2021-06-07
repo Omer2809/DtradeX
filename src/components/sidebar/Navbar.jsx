@@ -39,7 +39,7 @@ function Navbar({ user }) {
   useEffect(() => {
     async function fetchData() {
       // console.log(user);
-      if (user) {
+      if (user && user.userId) {
         const { data } = await userService.getUser(user.userId);
         // console.log(data);
 

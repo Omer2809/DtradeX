@@ -14,13 +14,14 @@ export const StyledSearchBar = styled.div`
 `;
 
 export const StyledSearchBarContent = styled.div`
-  max-width: 700px;
+  /* max-width: 700px; */
   position: relative;
   padding: 10px;
   border-radius: 50px;
   display: flex;
   height: 60px;
   color: #fff;
+width:100%;
 
   .fa-search {
     width: 50px;

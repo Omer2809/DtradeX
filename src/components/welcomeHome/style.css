@@ -174,5 +174,22 @@
   /* background-color: #132c22; */
   -webkit-box-shadow: 3px 3px 10px 3px #67a879;
   -moz-box-shadow: 3px 3px 10px 3px #5d8a69;
-  box-shadow: 3px 3px 10px 3px #659973;
+  box-shadow: 3px 3px 10px 3px #f59973;
+}
+
+/* gotop filter and search */
+
+#gotop {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+#select-filter{
+  margin-top:2rem;
+  margin-top: 1rem;
+  border: 2px solid #67a879;
+  border-radius: 1rem;
+  box-shadow: 2px 7px 5px rgb(0 0 0 / 45%);
 }
