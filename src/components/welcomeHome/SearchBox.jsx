@@ -6,20 +6,8 @@ import {
   StyledSearchBarContent,
 } from "../styles/StyledSearchBar";
 
-const SearchBar = ({ callback }) => {
-  const [state, setState] = useState("");
-  const timeOut = useRef(null);
+const SearchBox = ({ value, onChange ,placeholder}) => {
 
-  const doSearch = (event) => {
-    const { value } = event.target;
-
-    clearTimeout(timeOut.current);
-    setState(value);
-
-    timeOut.current = setTimeout(() => {
-      callback(value);
-    }, 500);
-  };
 
   return (
     <StyledSearchBar>
@@ -28,9 +16,10 @@ const SearchBar = ({ callback }) => {
           <FontAwesome className="fa-search" name="search" />
           <input
             type="text"
-            placeholder="Search Product"
-            onChange={doSearch}
-            value={state}
+            name="query"
+            placeholder={placeholder || "Search..."} 
+            value={value}
+            onChange={e => onChange(e.currentTarget.value)}
           />
         </StyledSearchBarContent>
       </div>
@@ -38,4 +27,4 @@ const SearchBar = ({ callback }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBox;

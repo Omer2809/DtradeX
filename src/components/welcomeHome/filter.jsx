@@ -1,6 +1,6 @@
 import React from "react";
 
-const Filter = ({ options, onChangeId }) => (
+const Filter = ({ options, onChangeId ,value}) => (
   <>
     <select
       id="select-filter"

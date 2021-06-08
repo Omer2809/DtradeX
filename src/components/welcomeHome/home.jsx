@@ -6,7 +6,7 @@ import { getListings } from "../../services/listingService";
 import { getCategories } from "../../services/categoryService";
 
 import ProductCarousel from "./productCarousel";
-import SearchBar from "./SearchBar";
+import SearchBox from "./SearchBox";
 import Card from "./card";
 import Footer from "./footerr";
 import Spinner from "./spinner";
@@ -61,6 +61,11 @@ const Home = () => {
     );
   };
 
+  const handleClear = () => {
+    setCategoryId("");
+    setSearchQuery("");
+  };
+
   return (
     <section className="new-products" style={{ paddingTop: 80 }}>
       <div className="container">
@@ -69,14 +74,19 @@ const Home = () => {
             <ProductCarousel products={products.slice(0, 4)} />
 
             <div id="gotop">
-              <SearchBar callback={setSearchQuery} />
+            <SearchBox
+              value={searchQuery}
+              onChange={(query)=>setSearchQuery(query)}
+              placeholder={"Search Product..."}
+            />
+          
               <Filter
                 options={categories}
                 onChangeId={(id) => setCategoryId(id)}
+                value={categoryId}
               />
+              <button className="clear-btn" onClick={handleClear}>Clear</button>
             </div>
-            {console.log(categoryId)}
-
             <GoTop to="gotop">
               <FontAwesome className="fa-arrow-up fa-2x" name="arrow" />
             </GoTop>

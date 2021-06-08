@@ -189,7 +189,31 @@
 #select-filter{
   margin-top:2rem;
   margin-top: 1rem;
-  border: 2px solid #67a879;
-  border-radius: 1rem;
-  box-shadow: 2px 7px 5px rgb(0 0 0 / 45%);
+  border: 1px solid #ced4da;
+  outline:0;
+  border-radius: 0.5rem;
+  transition:border .15s,box-shadow .15s;
+}
+
+#select-filter:focus{
+  border: 1px solid #86b7fe;
+  box-shadow: 0 0 0 5px #67a879;
+}
+
+.clear-btn{
+  border-radius :5px;
+  box-sizing:border-box;
+  padding:1rem;
+  width:100%;
+
+  background:#0d6efd;
+  border:0;
+  border-radius:30px;
+  color:#fff;
+  cursor:pointer;
+  outline:0;
+}
+
+.clear-btn:hover{
+  background:#0759d3;
 }
