@@ -1,12 +1,12 @@
 .front-container {
-  /* position: absolute; */
   margin: 80px auto;
 }
+
+.message--container{
+  padding-top: 8rem;
+}
+
 .front-container1 {
-  /* position: absolute; */
-  /* top: 80px;
-  left: 0;
-  right: 0; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -16,15 +16,27 @@
 }
 
 .profile-image {
-  /* margin-top: 7px; */
   border: 1px solid #333;
   height: 30px;
   width: 30px;
+  margin-right: 0.5rem;
+  justify-self: center;
 }
-
+.chat-top h3 {
+  padding-bottom: 0.4rem;
+}
 .contacts {
   background-color: #ffffff;
   min-height: 600px;
+}
+.msg {
+  display: inline;
+}
+.message-float-left {
+  float: left;
+}
+.message-float-right {
+  float: right;
 }
 
 .contact-table-scroll {
@@ -40,10 +52,10 @@
 .message-table-scroll {
   overflow-y: scroll;
   min-height: 550px;
+  padding: 0 1rem;
 }
 
 .message-box {
-  /* background-color: #F0F0F0; */
   background-color: #999;
   width: 100%;
 }
@@ -55,10 +67,7 @@
   padding: 5px;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* object-fit: contain; */
   object-fit: cover;
-
-  /* width: 150px; */
 }
 
 .product-top img:hover {
@@ -69,18 +78,15 @@
   opacity: 0;
 }
 .sender-web {
-  /* display: none; */
   font-size: 1.5rem;
   padding-bottom: 0.2rem;
 }
 @media (max-width: 700px) {
   .sender-web {
-    /* display: none; */
     font-size: 0rem !important;
     margin: 0rem 0rem 0rem;
     padding: 0rem;
     opacity: 0;
-    /* visibility: hidden; */
   }
   .sender-mobile {
     opacity: 1;

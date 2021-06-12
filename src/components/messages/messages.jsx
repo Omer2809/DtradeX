@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 
-import FA from "react-fontawesome";
+// import <FA from "react-fontawesome";
 import { Link } from "react-router-dom";
 
 import messagesApi from "../../services/messageService";
@@ -13,6 +13,7 @@ import ContactSellerForm from "../forms/contactSellerForm";
 
 import noimage from "./noimage.png";
 import "./style.css";
+import Icon from "../icon";
 
 function getChats(messages) {
   return messages.reduce((acc, curr) => {
@@ -31,7 +32,7 @@ function getChats(messages) {
 }
 
 function getClasses(msg) {
-  let classes = " p-2 mt-2 mr-5 shadow-sm text-white rounded  float";
+  let classes = " p-2 mt-2 mr-5 shadow-sm text-white rounded  message-float";
   if (!msg) classes += "-left bg-primary";
   else classes += "-right bg-success";
 
@@ -62,10 +63,9 @@ class Messages extends Component {
     let url = "";
 
     // const { user } = this.props;
-    const user  = auth.getCurrentUser();
+    const user = auth.getCurrentUser();
 
-   
-     const { data: profile } = user && await getUser(user.userId);
+    const { data: profile } = user && (await getUser(user.userId));
 
     if (profile.images?.length !== 0) url = profile.images[0].url;
 
@@ -143,8 +143,8 @@ class Messages extends Component {
 
     const messages = data.filter(
       (c) =>
-        c.participants.filter((u) => u.name === this.props.user?.name).length !==
-        0
+        c.participants.filter((u) => u.name === this.props.user?.name)
+          .length !== 0
     );
     // console.log("mesg clicked:", messages);
 
@@ -160,7 +160,7 @@ class Messages extends Component {
     let { loading, user, fromUser, messages, chats, listing, url } = this.state;
 
     return (
-      <div className="pt-5 pb-5">
+      <div className=" pb-5 message--container">
         <div className="container front-container1  mb-3 mt-4">
           <div className="row chat-top">
             <div className="d-flex col-sm-4 border-right border-secondary pt-3">
@@ -179,10 +179,10 @@ class Messages extends Component {
                 alt=""
                 className="profile-image rounded-circle mr-2"
               />
-              <div>
+              <h3>
                 {fromUser?.name || "Contact Details"}
                 {"  "} ({fromUser?.email})
-              </div>
+              </h3>
             </div>
           </div>
           {/* {loading && <Spinner />} */}
@@ -196,7 +196,6 @@ class Messages extends Component {
                       <tr key={index}>
                         <td>
                           <img
-                            // src={noimage}
                             src={getImageUrl(message.fromUser) || noimage}
                             alt=""
                             className="profile-image rounded-circle"
@@ -206,19 +205,19 @@ class Messages extends Component {
                           colSpan="2"
                           style={{
                             padding: 0,
-                            paddingTop: 15,
+                            paddingTop: 10,
                             cursor: "pointer",
                           }}
                           onClick={() => this.setChat(message)}
                         >
                           {message.fromUser.name}
                         </td>
-                        <td>
+                        <td style={{ paddingTop: 10 }}>
                           <small>
                             {new Date(message.createdAt).toDateString()}
                           </small>
                         </td>
-                        <td>
+                        <td style={{ paddingTop: 5 }}>
                           <button
                             type="button"
                             title="delete msg"
@@ -241,7 +240,7 @@ class Messages extends Component {
                               }
                             }}
                           >
-                            <FA className="trash" name="trash" />
+                            <Icon name="#delete" className="icon--small" />
                           </button>
                         </td>
                       </tr>
@@ -280,9 +279,16 @@ class Messages extends Component {
                               />
                             </Link>
                             <div className="p-3">
-                              <h5>Title: {listing?.title}</h5>
-                              <h5>Price: &#8377;{listing?.price}</h5>
-                              <h5>Description: {listing?.description}</h5>
+                              <h4>
+                                <strong>Title:</strong> {listing?.title}
+                              </h4>
+                              <h4>
+                                <strong>Price:</strong> &#8377;{listing?.price}
+                              </h4>
+                              <h4>
+                                <strong>Description:</strong>{" "}
+                                {listing?.description}
+                              </h4>
                             </div>
                           </td>
                         </tr>
@@ -292,7 +298,7 @@ class Messages extends Component {
                       </tr>
                       {messages?.map((message, index) => (
                         <tr key={index}>
-                          <td>
+                          <td className="msg">
                             <p
                               style={{
                                 cursor: "pointer",

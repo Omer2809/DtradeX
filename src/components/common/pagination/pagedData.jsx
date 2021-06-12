@@ -1,3 +1,4 @@
+
 import { paginate } from ".";
 
 export default function getPagedData(state, data) {

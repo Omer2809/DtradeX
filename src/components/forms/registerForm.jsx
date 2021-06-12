@@ -3,9 +3,14 @@ import Joi from "joi-browser";
 import Form from "../common/form/form";
 import * as userService from "../../services/userService";
 import auth from "../../services/authService";
-import { Container, FormWrap } from "../styles/FormStyling";
+import { Container, FormWrap } from "../styledComponents/FormStyling";
 import { toast } from "react-toastify";
 import Spinner from "../spinner";
+
+import signUpWebp from "../../images/signup.webp";
+import signUpWebp2 from "../../images/signup@2x.webp";
+import signUpJpg from "../../images/signup.jpg";
+import signUpJpg2 from "../../images/signup@2x.jpg";
 
 class RegisterForm extends Form {
   state = {
@@ -47,15 +52,35 @@ class RegisterForm extends Form {
         ) : (
           <>
             <FormWrap>
-              <h1>Sign Up</h1>
-              <p>It's free and only takes a minute</p>
-              <form onSubmit={this.handleSubmit}>
-                {this.renderInput("name", "Name")}
-                {this.renderInput("email", "Email", "email")}
-                {this.renderInput("password", "Password", "password")}
-                {this.renderButton("SignUp")}
-                {this.renderBottomText("SignUp")}
-              </form>
+              <div className="grid grid--1x2">
+                <div className="sign--form">
+                  <h1>Sign Up</h1>
+                  <p>It's free and only takes a minute</p>
+                  <form onSubmit={this.handleSubmit}>
+                    {this.renderInput("name", "Name")}
+                    {this.renderInput("email", "Email", "email")}
+                    {this.renderInput("password", "Password", "password")}
+                    {this.renderButton("SignUp")}
+                    {this.renderBottomText("SignUp")}
+                  </form>
+                </div>
+                <picture className="sign__image">
+                  <source
+                    type="image/webp"
+                    srcSet={`${signUpWebp} 1x,${signUpWebp2}  2x`}
+                  />
+
+                  <source
+                    type="image/jpg"
+                    srcSet={`${signUpJpg} 1x,${signUpJpg2}  2x`}
+                  />
+                  <img
+                    className="hero__image"
+                    src={signUpJpg}
+                    alt="shop cart signup image"
+                  />
+                </picture>
+              </div>
             </FormWrap>
             {this.renderFormFooter("Already", "Login")}
           </>

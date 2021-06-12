@@ -1,65 +1,41 @@
-import React from "react";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
-import * as FiIcons from "react-icons/fi";
+import sprite from "../../images/sprite-menu.svg";
 
-export const SidebarDataForStaff = [
+const Icon = ({ name, ...rest }) => (
+  <svg {...rest}>
+    <use href={sprite + name}></use>
+  </svg>
+);
+
+
+export const SidebarData = [
   {
     title: "Home",
     path: "/",
-    icon: <AiIcons.AiFillHome />,
+    icon: <Icon name="#home" className="icon--small" />,
     cName: "nav-text",
   },
   {
     title: "Listings",
     path: "/my-listings",
-    icon: <IoIcons.IoIosPaper />,
+    icon: <Icon name="#listing" className="icon--small"/>,
     cName: "nav-text",
   },
   {
     title: "Messages",
     path: "/messages",
-    icon: <FaIcons.FaBell />,
+    icon: <Icon name="#bell" className="icon--small"/>,
     cName: "nav-text",
   },
   {
     title: "Saved",
     path: "/favorites",
-    icon: <IoIcons.IoMdPeople />,
+    icon: <Icon name="#bookmark" className="icon--small"/>,
     cName: "nav-text",
   },
   {
     title: "Logout",
     path: "/logout",
-    icon: <FaIcons.FaSignOutAlt />,
-    cName: "nav-text",
-  },
-];
-export const SidebarDataForAdmin = [
-  {
-    title: "Logout",
-    path: "/plans",
-    icon: <FiIcons.FiPackage />,
-    cName: "nav-text",
-  },
-
-  {
-    title: "Users",
-    path: "/users",
-    icon: <FaIcons.FaUsers />,
-    cName: "nav-text",
-  },
-  // {
-  //   title: "History",
-  //   path: "/history",
-  //   icon: <FaIcons.FaHistory />,
-  //   cName: "nav-text",
-  // },
-  {
-    title: "Report",
-    path: "/report",
-    icon: <FaIcons.FaDatabase />,
+    icon:<Icon name="#logout" className="icon--small"/>,
     cName: "nav-text",
   },
 ];

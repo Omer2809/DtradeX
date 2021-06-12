@@ -1,5 +1,5 @@
 import React from "react";
-import { FormGroup } from "../../styles/InputStyling";
+import { FormGroup } from "../../styledComponents/InputStyling";
 
 const Select = ({ name, label, options, error, ...rest }) => {
   return (

@@ -1,7 +1,8 @@
 import React from "react";
-import { FaPlus } from "react-icons/fa";
-import "../../styles/styledTable.css";
-import { AddNewButton } from "../../styles/StyledButtons";
+// import { FaPlus } from "react-icons/fa";
+import "../../styledComponents/styledTable.css";
+import { AddNewButton } from "../../styledComponents/StyledButtons";
+import Icon from "../../icon";
 
 const Header = ({ name, totalCount, url, noAddButton }) => {
   return (
@@ -24,8 +25,8 @@ const Header = ({ name, totalCount, url, noAddButton }) => {
             : `Showing ${totalCount} ${name}s in your Database.`}
         </p>
         {!noAddButton && (
-          <AddNewButton style={{ marginRight: 45 }} to={url}>
-            <FaPlus style={{ marginBottom:2}}/>  New{" "}
+          <AddNewButton style={{ marginRight: 45,padding:5 }} to={url}>
+            <Icon name="#plus" className="icon--small" style={{ paddingBottom:2 }} />  New{" "}
             {name}
           </AddNewButton>
         )}

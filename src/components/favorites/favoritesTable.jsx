@@ -31,7 +31,7 @@ class FavoritesTable extends Component {
               this.props.onDelete(favorite);
             }
           }}
-          className="btn btn-danger btn-sm"
+          className="btn btn-danger btn-sm btn--square"
         >
           Delete
         </button>

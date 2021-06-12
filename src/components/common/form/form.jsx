@@ -7,7 +7,7 @@ import {
   BottomText,
   FooterLink,
   Button,
-} from "../../styles/FormStyling";
+} from "../../styledComponents/FormStyling";
 import TextArea from "./textArea";
 import Select from "./select";
 

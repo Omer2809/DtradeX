@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import styled from "styled-components";
+
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //Image upload modules
 import "antd/dist/antd.css";
-import "./App.css";
 
 import Home from "./components/welcomeHome/home";
 import LoginForm from "./components/forms/loginForm";
@@ -18,23 +17,16 @@ import Logout from "./components/logout";
 import NotFound from "./components/notFound";
 
 import { ListingForm, MyListings, ListingDetails } from "./components/listings";
-import Favorites from "./components/favorites/favorites";
-import Messages from "./components/messages/messages";
+// import Favorites from "./components/favorites/favorites";
+// import Messages from "./components/messages/messages";
 
 import auth from "./services/authService";
 import ProtectedRoute from "./components/common/protectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import FallBack from "./components/fallBack";
 
-import backgroundImage from "./images/bg1.png";
-
-const ShowcaseContainer = styled.div`
-  /* background: #c6f6d5cc; */
-  background: url(${backgroundImage}) no-repeat ;
-  background-size:cover;
-  min-height: 100vh;
-  width: 100%;
-
-`;
+const Messages = lazy(() => import("./components/messages/messages"));
+const Favorites = lazy(() => import("./components/favorites/favorites"));
 
 function App() {
   const [user, setUser] = useState({});
@@ -45,13 +37,14 @@ function App() {
 
   return (
     <>
-      <ShowcaseContainer>
-        <ScrollToTop />
-        <ToastContainer />
-        <Navbar user={user} />
+      <ScrollToTop />
+      <ToastContainer />
+      <Navbar user={user} />
+      <Suspense fallback={<FallBack/>}>
         <Switch>
           <Route path="/login" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
+
           <ProtectedRoute path="/my-listings" component={MyListings} />
           <ProtectedRoute
             path="/messages"
@@ -65,7 +58,7 @@ function App() {
           <Route path="/" component={Home} exact />
           <Redirect to="/not-found" />
         </Switch>
-      </ShowcaseContainer>
+      </Suspense>
     </>
   );
 }

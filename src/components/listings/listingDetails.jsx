@@ -72,7 +72,7 @@ const ListingDetails = (props) => {
       )}
       <div className="container" style={{ paddingTop: 70, paddingBottom: 10 }}>
      
-        <Link className="btn btn-light my-3" to="/">
+        <Link className="btn btn-light my-3 btn--square mb-2" to="/">
           &lt; Go Back
         </Link>
         
@@ -82,7 +82,6 @@ const ListingDetails = (props) => {
               <Carousel
                 pause="hover"
                 className="listing-carousel"
-                style={{ backgroundColor: "#70b694" }}
               >
                 {getListingApi.data?.images?.map((image, index) => (
                   <Carousel.Item key={index}>
@@ -91,6 +90,7 @@ const ListingDetails = (props) => {
                 ))}
               </Carousel>
             </Col>
+            
             <Col md={3}>
               <ListGroup variant="flush" className="details-box">
                 <ListGroup.Item>
@@ -105,7 +105,7 @@ const ListingDetails = (props) => {
                 {getListingApi.data.bidding === "Yes" && (
                   <ListGroup.Item>
                     <Button
-                      className="btn-block"
+                      className="btn btn--block btn--primary btn--square"
                       type="button"
                       onClick={() => {
                         if (!user?.userId)
@@ -199,7 +199,7 @@ const ListingDetails = (props) => {
 
                   <ListGroup.Item>
                     <Button
-                      className="btn-block"
+                      className="btn btn--block btn--primary btn--square"
                       type="button"
                       onClick={() => {
                         if (!user?.userId)

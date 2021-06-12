@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
 
 import Table from "../common/tableFolder/table";
 import noImage from "../common/img/noimage.png";
+import Icon from "../icon";
 
 class ListingsTable extends Component {
   columns = [
@@ -25,8 +25,8 @@ class ListingsTable extends Component {
     {
       key: "edit",
       content: (listing) => (
-        <Link to={`/listings/${listing._id}`} style={{ color: "green" }}>
-          <FaEdit />
+        <Link to={`/listings/${listing._id}`} style={{marginLeft:20,marginRight:20}} >
+          <Icon name="#edit-table" className="icon--small"/>
         </Link>
       ),
     },
@@ -39,7 +39,7 @@ class ListingsTable extends Component {
               this.props.onDelete(listing);
             }
           }}
-          className="btn btn-danger btn-sm"
+          className="btn btn-danger btn-sm btn--square ml-3"
         >
           Delete
         </button>
@@ -55,11 +55,13 @@ class ListingsTable extends Component {
 }
 
 const imageStyling = {
-  width: 80,
-  height: 100,
+  width: 100,
+  height: 110,
   // margin: 10,
   borderRadius: 3,
   border: 3,
+  margintop: 10,
+  marginBottom: 10,
   borderColor: "#fff",
   borderStyle: "solid",
 };

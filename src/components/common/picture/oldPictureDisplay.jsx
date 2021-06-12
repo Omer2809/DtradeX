@@ -1,11 +1,10 @@
 import React from "react";
 
 import "../../welcomeHome/style.css";
-import FA from "react-fontawesome";
-
+import Icon from "../../icon";
 const OldPictureDisplay = ({ image, onDelete }) => {
   return (
-    <div className="card-container">
+    <div className="picture-card">
       <img
         src={image.url || image}
         style={{
@@ -16,14 +15,14 @@ const OldPictureDisplay = ({ image, onDelete }) => {
         }}
         alt="product"
       />
-      <div className="overlay">
+      <div className="picture-overlay">
         <button
           type="button"
-          className="delete-btn"
+          className="overlay__icon delete-btn"
           title="delete Image"
           onClick={() => onDelete(image)}
         >
-          <FA className="delete" name="trash" />
+          <Icon className="icon--small delete--icon" name="#delete" />
         </button>
       </div>
     </div>

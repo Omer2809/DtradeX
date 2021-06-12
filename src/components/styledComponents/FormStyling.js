@@ -3,10 +3,10 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
-  margin: auto ;
-  max-width: 450px;
+  margin: auto;
+  max-width: 850px;
   padding: 20px;
-  padding-top:70px;
+  padding-top: 70px;
   @media (max-width: 880px) {
     /* margin: 20px auto 35px; */
   }
@@ -14,17 +14,33 @@ export const Container = styled.div`
 
 export const FormWrap = styled.div`
   background: #fff;
-  max-width: 400px;
+  max-width: 800px;
   padding: 30px;
   color: #333;
   border-radius: 7px;
   border-bottom: 4px solid #132c20;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 
-  h1,
-  p {
+  .sign--form h1,
+  .sign--form p {
     text-align: center;
   }
+  .sign--form h1 {
+    margin-top: 0;
+    margin: 0;
+  }
+  .sign--form {
+    margin-left: 1rem;
+  }
+
+  img {
+    justify-self: center;
+    margin-top: 5rem;
+  }
+
+  /* .sign__image {
+    order: -1;
+  } */
 `;
 
 export const Button = styled.button`

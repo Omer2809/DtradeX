@@ -6,6 +6,7 @@ export const FormGroup = styled.div`
   label {
     display: block;
     color: #444;
+    padding-top: 1rem;
   }
   .alert {
     color: red;
@@ -13,7 +14,11 @@ export const FormGroup = styled.div`
     margin-top: 5px;
   }
   select {
-    padding: 5px;
+    padding: 0.7rem;
+  }
+
+  .form-control {
+    font-size: 1.5rem;
   }
 `;
 
@@ -22,7 +27,7 @@ export const StyledInput = styled.input`
   background-color: #eee;
   border: 1px solid #cfd8dc;
   border-radius: 3px;
-  padding: 8.85px 13px;
+  padding: 1rem 1.5rem;
   margin-bottom: 2px;
   font-weight: 300;
   font-size: 14px;

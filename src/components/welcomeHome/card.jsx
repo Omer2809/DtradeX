@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import "./style.css";
-import FA from "react-fontawesome";
+// import FA from "react-fontawesome";
 import favoritesApi from "../../services/favoriteService";
 import { toast } from "react-toastify";
+import Icon from "../icon";
 
 function getClasses(favorited) {
-  let classes = "bookmark";
-  if (!favorited) classes += "-o";
-  return classes;
+  if (!favorited) return "#ribbon";
+  return "#bookmark";
 }
 
 const Card = ({ listing, userId }) => {
@@ -40,38 +40,34 @@ const Card = ({ listing, userId }) => {
   };
 
   return (
-    <div className="card-container">
-      <div className="cardd">
+    <div className="listing-card">
+
+      <div className="listing-card-showcase">
         <Link to={`/listing/details/${listing._id}`}>
           <img
-            src={listing?.images &&listing?.images[0]?.url}
-            style={{ height: 200, borderBottom: 2 }}
+            src={listing?.images && listing?.images[0]?.url}
+            className="listing-card__image"
             alt="product"
           />
         </Link>
-        <div
-          className="card-text"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: 6,
-            fontSize: 15,
-          }}
-        >
-          <div>{listing.title}</div>
-          <div> &#8377; {listing.price}</div>
+        <div className="listing-card__text">
+          <h4>{listing.title}</h4>
+          <h4> &#8377; {listing.price}</h4>
         </div>
       </div>
-      <div className="overlay">
+
+      <div className="listing-card-overlay">
         {listing?.added_by._id === userId && (
-          <button type="button" className="edit-btn">
-            <Link to={`/listings/${listing._id}`}>
-              <FA className="pencil" name="pencil" />
-            </Link>
-          </button>
+          <Link to={`/listings/${listing._id}`} className="overlay__icon">
+            <Icon name={"#edit"} className="icon--small edit--icon" />
+          </Link>
         )}
-        <button type="button" className="bookmark-btn" onClick={handleBookMark}>
-          <FA className="bookmark" name={getClasses(favorited)} />
+        <button
+          type="button"
+          className="overlay__icon"
+          onClick={handleBookMark}
+        >
+          <Icon name={getClasses(favorited)} className="icon--small bookmark--icon" />
         </button>
       </div>
     </div>

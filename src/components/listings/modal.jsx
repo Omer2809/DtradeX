@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
-import { MdClose } from "react-icons/md";
+// import { MdClose } from "react-icons/md";
 import BiddingForm from "../forms/biddingForm";
 import ContactSellerForm from "../forms/contactSellerForm";
+import Icon from "../icon";
 
 const Background = styled.div`
   width: 100%;
@@ -61,7 +62,7 @@ const ModalContent = styled.div`
   }
 `;
 
-const CloseModalButton = styled(MdClose)`
+const CloseModalButton = styled(Icon)`
   cursor: pointer;
   position: absolute;
   top: 20px;
@@ -133,6 +134,9 @@ export const Modal = ({
               <CloseModalButton
                 aria-label="Close modal"
                 onClick={() => setShowModal((prev) => !prev)}
+
+                name="#close"
+                className="icon__medium"
               />
             </ModalWrapper>
           </animated.div>

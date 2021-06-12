@@ -1,121 +1,99 @@
-import React from "react";
-import { StyledFooter, FooterLink, SocialLink } from "../styles/StyledFooterr";
-import LOGO from "../common/img/logo.png";
-import FontAwesome from "react-fontawesome";
+import React, { useState } from "react";
+
+import FooterSection from "./footerSection";
 import { Link } from "react-router-dom";
+import Icon from "../icon";
 
-const links = [
-  { name: "Facebook", to: "#", icon: "fa-facebook" },
-  { name: "Instagram", to: "#", icon: "fa-instagram" },
-  { name: "Youtube", to: "#", icon: "fa-youtube" },
-  { name: "Twitter", to: "#", icon: "fa-twitter" },
-];
-
-const siteLinks = [
-  { name: "Help & Support", to: "#" },
-  { name: "Privacy Policy", to: "#" },
-  { name: "About Us", to: "#" },
-  { name: "Contact", to: "#" },
-];
+import playstore from "../../images/playstore.png";
 
 const Footer = ({ user }) => {
+  const [show, setShow] = useState(true);
+
   return (
-    <StyledFooter>
-      <div
-        className="GlobalContainer footer-container"
-      >
-        <div style={{ padding: 15, marginLeft: 10 }}>
-          <Link to="/">
-            <img
-              src={LOGO}
-              alt="footerlogo"
-              style={{
-                Maxheight: 70,
-                width: "100%",
-                marginTop: 10,
-                paddingRight: 10,
-              }}
-            />
-          </Link>
-          <p>
-            -Your Online market where you can buy and sell any thing that you
-            don't need any more.
-          </p>
-          <div className="d-flex p-2 mt-3 share" style={{}}>
-            <img
-              src="https://statics.olx.in/external/base/img/playstore_2x.png"
-              alt="android link"
-              style={{ marginRight: 10 }}
-            />
-            <img
-              src="https://statics.olx.in/external/base/img/appstore_2x.png"
-              alt="ios link"
-            />
+    <>
+      <div className="container">
+        <div className="callout callout--primary callout-signup">
+          <div className="grid grid--1x2">
+            <div className="callout__content">
+              <h2 className="callout__heading">Ready to Get Started?</h2>
+
+              <p>
+                Get Start, Create your account and explore the world of trade.
+                Find deals that best suits you, sell your products.
+              </p>
+            </div>
+
+            <Link
+              to={user ? "/listings/new" : "/login"}
+              className="btn btn--secondary btn--stretched"
+            >
+              Get Started
+            </Link>
           </div>
-        </div>
-        <div>
-          <h3>Quick Links</h3>
-          <ul className="list">
-            <li>
-              <FooterLink to="/">Home</FooterLink>
-            </li>
-            <li>
-              <FooterLink to="/listings/new">+ Sell</FooterLink>
-            </li>
-            {user ? (
-              <li>
-                <FooterLink to="/logout">Sign Out</FooterLink>
-              </li>
-            ) : (
-              <>
-                <li>
-                  <FooterLink to="/register">Sign Up</FooterLink>
-                </li>
-                <li>
-                  <FooterLink to="/login">Sign In</FooterLink>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-
-        <div>
-          <h3>Site Links</h3>
-          <ul className="list">
-            {siteLinks.map((link, index) => (
-              <li key={index}>
-                <FooterLink to={link.to}>{link.name}</FooterLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h3>FOLLOW US</h3>
-          <div className="socialLog">
-            {links.map((link, index) => (
-              <div className="wrapper" key={index}>
-                <SocialLink to={link.to}>
-                  <FontAwesome className={link.icon} name={link.name} />
-                </SocialLink>
-                <FooterLink to={link.to}>{link.name}</FooterLink>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div
-          className="disclaimer"
-          style={{
-            backgroundColor: "#132c20",
-            color: "#c6f6d5cc",
-            maxWidth: "800",
-          }}
-        >
-          <p>Copyright &copy; 2021, All Rights Reserved</p>
         </div>
       </div>
-    </StyledFooter>
+
+      <footer className="block block--dark footer">
+        <div className="container grid footer__sections">
+          <section
+            className={
+              show
+                ? "collapsible collapsible--expanded footer__section"
+                : "collapsible  footer__section"
+            }
+          >
+            <div className="collapsible__header">
+              <h2 className="collapsible__heading footer__heading">
+                Quick Links
+              </h2>
+              <Icon
+                style={{ cursor: "pointer" }}
+                onClick={() => setShow(!show)}
+                name="#chevron"
+                className="icon icon--white collapsible__chevron"
+              />
+            </div>
+
+            <div className="collapsible__content">
+              <ul className="list">
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+
+                {user ? (
+                  <>
+                    <li>
+                      <Link to="/listings/new">+Sell</Link>
+                    </li>
+                    <li>
+                      <Link to="/logout">Logout</Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/register">Sign Up</Link>
+                    </li>
+                    <li>
+                      <Link to="/login">Sign In</Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+          </section>
+
+          <FooterSection />
+
+          <div className="footer__brand">
+            <Icon name="#logo-light" className="icon--medium logo-icon" />
+            <h3>DtradeX</h3>
+            <p className="footer__copyright">&copy; Copyright 2021 Mohd Omer</p>
+            <img className="playstore" src={playstore} alt="play store link" />
+          </div>
+        </div>
+      </footer>
+    </>
   );
 };
 

@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react";
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { IconContext } from "react-icons";
 
-import { SidebarDataForStaff, SidebarDataForAdmin } from "./SidebarData";
+import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
-import LOGO from "../common/img/logo.png";
-import { NavItemButton } from "../styles/StyledButtons";
 import UploadPictures from "../common/picture/uploadPictures";
 import * as userService from "../../services/userService";
 import { toast } from "react-toastify";
 import OldPictureDisplay from "../common/picture/oldPictureDisplay";
-import styled from "styled-components";
 
-const NavItems = styled.ul`
-  list-style: none;
-  display: flex;
-  align-items: center;
-  padding: 10px;
-`;
+import Icon from "../icon";
 
 function Navbar({ user }) {
   const [sidebar, setSidebar] = useState(false);
@@ -38,10 +27,8 @@ function Navbar({ user }) {
 
   useEffect(() => {
     async function fetchData() {
-      // console.log(user);
       if (user && user.userId) {
         const { data } = await userService.getUser(user.userId);
-        // console.log(data);
 
         if (data.images?.length !== 0) {
           setUrl(data.images[0].url);
@@ -95,92 +82,72 @@ function Navbar({ user }) {
   window.addEventListener("scroll", changeBackground);
 
   return (
-    <>
-      <IconContext.Provider value={{ color: "#fff" }}>
-        <div className={navbarBg ? "navbarr activeIt" : "navbarr "}>
-          <div className="NavContainer">
-            {user ? (
-              <>
-                {url ? (
-                  <img
-                    src={url}
-                    onClick={showSidebar}
-                    style={{ cursor: "pointer" }}
-                    alt=""
-                    className="profile-image rounded-circle mb-3 mr-3"
-                  />
-                ) : (
-                  <Link
-                    to="#"
-                    className="menu-bars rounded-circle p-2 mb-3 ml-xs-4"
-                  >
-                    <FaIcons.FaUser
-                      onClick={showSidebar}
-                      style={{
-                        color: "#eee",
-                        background: "#132c20",
-                        opacity: 0.95,
-                        fontSize: 30,
-                        borderRadius: "50%",
-                        padding: 3,
-                      }}
-                    />
-                  </Link>
-                )}
-                <Link to="/" className="logoo">
-                  <img src={LOGO} alt="footerlogo" />
-                </Link>
-                <NavItems>
-                  <NavItemButton to="/listings/new">+ Sell</NavItemButton>
-                  {/* <NavItemButton to="/logout">Logout</NavItemButton> */}
-                </NavItems>
-              </>
-            ) : (
-              <>
-                <Link to="/" className="logoo">
-                  <img src={LOGO} alt="footerlogo" />
-                </Link>
-                <NavItems>
-                  <NavItemButton to="/register">Sign Up</NavItemButton>
-                  <NavItemButton to="/login">Login</NavItemButton>
-                </NavItems>
-              </>
-            )}
-          </div>
-        </div>
-        <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
-          <ul>
-            <li className="navbar-toggle" onClick={showSidebar}>
-              <Link to="#" className="menu-bars cross">
-                <AiIcons.AiOutlineClose
-                  style={{ fontSize: 30, color: "#132c20" }}
-                />
-              </Link>
-            </li>
-            <li
-              className="navbar-toggle"
-              style={{ paddingLeft: 30, marginTop: 20 }}
-            >
-              {/* {console.log(url, count)} */}
-              {/* {url !== "" ? ( */}
+    <header>
+      <nav className={navbarBg ? "nav--bar activeIt" : "nav--bar "}>
+        <div className="nav-container">
+          {user ? (
+            <>
               {url ? (
-                <OldPictureDisplay image={url} onDelete={handleImageDelete} />
-              ) : (
-                <UploadPictures
-                  uploadImages={uploadProfileImage}
-                  count={count}
+                <img
+                  src={url}
+                  onClick={showSidebar}
+                  style={{ cursor: "pointer" }}
+                  alt=""
+                  className="home-profile-image"
                 />
+              ) : (
+                <span className="home-profile-icon" onClick={showSidebar}>
+                  <Icon name="#user" className="icon" />
+                </span>
               )}
-            </li>
-          </ul>
-          <ul className="nav-menu-items" onClick={showSidebar}>
-            {/* <li className="navbar-toggle">
-              <Link to="#" className="menu-bars cross">
-                <AiIcons.AiOutlineClose style={{ fontSize: 30 }} />
+              <Link to="/" className="nav__brand">
+                <Icon name="#logo-red" className="icon--medium logo-icon" />
+                <h3>DtradeX</h3>
               </Link>
-            </li> */}
+              <ul className="list nav__list">
+                <li className="nav__item">
+                  <button className="btn btn-block btn--secondary btn--nav btn--hide">
+                    <Link to="/listings/new" className="cap"> <Icon name="#plus" className="icon--small" /> SELL</Link>
+                  </button>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <>
+              <Link to="/" className="nav__brand">
+                <Icon name="#logo-red" className="icon--medium logo-icon" />
+                <h3>DtradeX</h3>
+              </Link>
+              <ul className="list nav__list">
+                <li className="nav__item">
+                  <Link to="/login">Login</Link>
+                </li>
+                <li className="nav__item">
+                  <button className="btn btn-block btn--secondary btn--nav btn--hide">
+                    <Link to="/register">Sign Up</Link>
+                  </button>
+                </li>
+              </ul>
+            </>
+          )}
+        </div>
+      </nav>
 
-            {SidebarDataForStaff.map((item, index) => {
+      <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+        <ul className="side-menu-list">
+          <li className="navbar-toggle" onClick={showSidebar}>
+            <Icon name="#close" className="icon--small menu-bars cross" />
+          </li>
+          <li className="navbar-toggle navbar-picture-upload ">
+            {url ? (
+              <OldPictureDisplay image={url} onDelete={handleImageDelete} />
+            ) : (
+              <UploadPictures uploadImages={uploadProfileImage} count={count} />
+            )}
+          </li>
+
+          <li className="nav-menu-items " onClick={showSidebar}>
+            {SidebarData.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path} className="icon">
@@ -190,31 +157,10 @@ function Navbar({ user }) {
                 </li>
               );
             })}
-            {user && user.isAdmin && (
-              <>
-                {SidebarDataForAdmin.map((item, index) => {
-                  return (
-                    <li key={index + 6} className={item.cName}>
-                      <Link to={item.path}>
-                        {item.icon}
-                        <span className="NavSpan">{item.title}</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </>
-            )}
-
-            {/* <li className="nav-text">
-              <Link to="/logout">
-                <FaIcons.FaSignOutAlt />
-                <span className="NavSpan">Logout</span>
-              </Link>
-            </li> */}
-          </ul>
-        </nav>
-      </IconContext.Provider>
-    </>
+          </li>
+        </ul>
+      </nav>
+    </header>
   );
 }
 

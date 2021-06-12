@@ -8,7 +8,7 @@ const GlobalContainer = ({ children }) => {
         pt-4 pl-3 pr-3 pb-3
         ml-3 mr-3 mb-2 
         bg-light shadow rounded"
-        style={{ marginTop: 80 }}
+        style={{ marginTop: 80,padding:50 }}
       >
         {children}
       </div>

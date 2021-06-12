@@ -2,7 +2,7 @@ import React from "react";
 // import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "../common/form/form";
-import { Container } from "../styles/FormStyling";
+import { Container } from "../styledComponents/FormStyling";
 import { toast } from "react-toastify";
 import { updateListingPrice } from "../../services/listingService";
 

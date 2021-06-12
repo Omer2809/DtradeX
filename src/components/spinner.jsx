@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledSpinner,StyledText } from "./styles/StyledSpinner";
+import { StyledSpinner,StyledText } from "./styledComponents/StyledSpinner";
 
 const Spinner = ({ form, saving ,reg,log}) => (
   <>

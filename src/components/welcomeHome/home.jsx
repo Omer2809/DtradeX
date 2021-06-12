@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
-import FontAwesome from "react-fontawesome";
+// import FontAwesome from "react-fontawesome";
 
 import auth from "../../services/authService";
 import { getListings } from "../../services/listingService";
 import { getCategories } from "../../services/categoryService";
 
-import ProductCarousel from "./productCarousel";
 import SearchBox from "./SearchBox";
 import Card from "./card";
 import Footer from "./footerr";
 import Spinner from "./spinner";
 import LoadMoreButton from "./loadmorebtn";
-import Filter from "./filter";
 
-import "./style.css";
-import { GoTop } from "../styles/Styledgotopbtn";
+import { GoTop } from "../styledComponents/Styledgotopbtn";
+import Icon from "../icon";
+import Hero from "./hero";
+
+import "../../styles/App.css";
 
 const Home = () => {
   const [user, setUser] = useState({});
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [visible, setVisible] = useState(12);
+  const [visible, setVisible] = useState(8);
   const [loading, setLoading] = useState(false);
   const [categoryId, setCategoryId] = useState(null);
 
@@ -55,9 +56,7 @@ const Home = () => {
       (query === "" ||
         product?.price?.toString()?.startsWith(query) ||
         product?.title?.toLowerCase().startsWith(query.toLowerCase())) &&
-      ( product?.categoryId._id === catId || 
-        catId===null ||
-         catId==="" )
+      (product?.categoryId._id === catId || catId === null || catId === "")
     );
   };
 
@@ -66,51 +65,39 @@ const Home = () => {
     setSearchQuery("");
   };
 
+  const getFilteredProducts = (listings) => {
+    return listings.filter((listing) => {
+      if (canShow(listing, searchQuery, categoryId)) return listing;
+    });
+  };
+
   return (
-    <section className="new-products" style={{ paddingTop: 80 }}>
+    <section className="home-page">
       <div className="container">
-        {products.length !== 0 && (
-          <>
-            <ProductCarousel products={products.slice(0, 4)} />
+        <Hero user={user} />
+        <div id="gotop">
+          <SearchBox
+            value={searchQuery}
+            onChange={(query) => setSearchQuery(query)}
+            options={categories.slice(0, 6)}
+            select={(id) => setCategoryId(id)}
+          />
+        </div>
 
-            <div id="gotop">
-            <SearchBox
-              value={searchQuery}
-              onChange={(query)=>setSearchQuery(query)}
-              placeholder={"Search Product..."}
-            />
-          
-              <Filter
-                options={categories}
-                onChangeId={(id) => setCategoryId(id)}
-                value={categoryId}
-              />
-              <button className="clear-btn" onClick={handleClear}>Clear</button>
-            </div>
-            <GoTop to="gotop">
-              <FontAwesome className="fa-arrow-up fa-2x" name="arrow" />
-            </GoTop>
+        <GoTop to="gotop">
+          <Icon className="icon" name="#arrow-up" />
+        </GoTop>
 
-            <div className="title-box" style={{ marginTop: 20 }}>
-              <h2>New Arrivals</h2>
-            </div>
-          </>
-        )}
-
-        <div className="listings" style={{ paddingBottom: 10 }}>
+        <div className="grid listings--grid ">
           {products.length !== 0 &&
-            products
-              .filter((product) => {
-                if (canShow(product, searchQuery, categoryId)) return product;
-              })
+            getFilteredProducts(products)
               .slice(0, visible)
               .map((listing, index) => (
                 <Card key={index} listing={listing} userId={user?.userId} />
               ))}
         </div>
-
         {loading && <Spinner />}
-        {visible < products.length && (
+        {visible < getFilteredProducts(products).length && (
           <LoadMoreButton loadMore={() => setVisible(visible + 8)} />
         )}
       </div>
