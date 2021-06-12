@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/DtradeX/static/css/main.65fcfe57.chunk.css",
+    "main.js": "/DtradeX/static/js/main.bcb65b66.chunk.js",
+    "main.js.map": "/DtradeX/static/js/main.bcb65b66.chunk.js.map",
+    "runtime-main.js": "/DtradeX/static/js/runtime-main.769aeedf.js",
+    "runtime-main.js.map": "/DtradeX/static/js/runtime-main.769aeedf.js.map",
+    "static/css/2.4a1f16da.chunk.css": "/DtradeX/static/css/2.4a1f16da.chunk.css",
+    "static/js/2.0f4f1f9c.chunk.js": "/DtradeX/static/js/2.0f4f1f9c.chunk.js",
+    "static/js/2.0f4f1f9c.chunk.js.map": "/DtradeX/static/js/2.0f4f1f9c.chunk.js.map",
+    "static/css/3.321bb470.chunk.css": "/DtradeX/static/css/3.321bb470.chunk.css",
+    "static/js/3.693cec50.chunk.js": "/DtradeX/static/js/3.693cec50.chunk.js",
+    "static/js/3.693cec50.chunk.js.map": "/DtradeX/static/js/3.693cec50.chunk.js.map",
+    "static/js/4.de0ad6b2.chunk.js": "/DtradeX/static/js/4.de0ad6b2.chunk.js",
+    "static/js/4.de0ad6b2.chunk.js.map": "/DtradeX/static/js/4.de0ad6b2.chunk.js.map",
+    "index.html": "/DtradeX/index.html",
+    "static/css/2.4a1f16da.chunk.css.map": "/DtradeX/static/css/2.4a1f16da.chunk.css.map",
+    "static/css/3.321bb470.chunk.css.map": "/DtradeX/static/css/3.321bb470.chunk.css.map",
+    "static/css/main.65fcfe57.chunk.css.map": "/DtradeX/static/css/main.65fcfe57.chunk.css.map",
+    "static/js/2.0f4f1f9c.chunk.js.LICENSE.txt": "/DtradeX/static/js/2.0f4f1f9c.chunk.js.LICENSE.txt",
+    "static/media/banner.0410ec19.png": "/DtradeX/static/media/banner.0410ec19.png",
+    "static/media/banner.50e56567.webp": "/DtradeX/static/media/banner.50e56567.webp",
+    "static/media/banner@2x.1877e6c7.webp": "/DtradeX/static/media/banner@2x.1877e6c7.webp",
+    "static/media/banner@2x.bfffeaaf.png": "/DtradeX/static/media/banner@2x.bfffeaaf.png",
+    "static/media/login.00dadb9e.webp": "/DtradeX/static/media/login.00dadb9e.webp",
+    "static/media/login.3adff5d5.jpg": "/DtradeX/static/media/login.3adff5d5.jpg",
+    "static/media/login@2x.07ae8672.jpg": "/DtradeX/static/media/login@2x.07ae8672.jpg",
+    "static/media/login@2x.88510f0f.webp": "/DtradeX/static/media/login@2x.88510f0f.webp",
+    "static/media/signup.28085be0.webp": "/DtradeX/static/media/signup.28085be0.webp",
+    "static/media/signup.bc858a3f.jpg": "/DtradeX/static/media/signup.bc858a3f.jpg",
+    "static/media/signup@2x.a033faed.webp": "/DtradeX/static/media/signup@2x.a033faed.webp",
+    "static/media/signup@2x.e99cbffc.jpg": "/DtradeX/static/media/signup@2x.e99cbffc.jpg",
+    "static/media/sprite-menu.471ced7e.svg": "/DtradeX/static/media/sprite-menu.471ced7e.svg",
+    "static/media/sprite.11f2b2c1.svg": "/DtradeX/static/media/sprite.11f2b2c1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.769aeedf.js",
+    "static/css/2.4a1f16da.chunk.css",
+    "static/js/2.0f4f1f9c.chunk.js",
+    "static/css/main.65fcfe57.chunk.css",
+    "static/js/main.bcb65b66.chunk.js"
+  ]
+}
