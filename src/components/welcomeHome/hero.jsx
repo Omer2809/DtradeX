@@ -36,7 +36,7 @@ const Hero = ({user}) => {
           <img
             className="hero__image"
             src={bannerPng}
-            alt="shop cart banner image"
+            alt="shop cart banner "
           />
         </picture>
       </div>

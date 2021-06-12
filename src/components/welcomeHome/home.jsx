@@ -60,11 +60,6 @@ const Home = () => {
     );
   };
 
-  const handleClear = () => {
-    setCategoryId("");
-    setSearchQuery("");
-  };
-
   const getFilteredProducts = (listings) => {
     return listings.filter((listing) => {
       if (canShow(listing, searchQuery, categoryId)) return listing;

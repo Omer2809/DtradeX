@@ -77,7 +77,7 @@ class RegisterForm extends Form {
                   <img
                     className="hero__image"
                     src={signUpJpg}
-                    alt="shop cart signup image"
+                    alt="shop cart signup "
                   />
                 </picture>
               </div>

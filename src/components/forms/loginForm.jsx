@@ -82,7 +82,7 @@ class LoginForm extends Form {
                   <img
                     className="hero__image"
                     src={loginJpg}
-                    alt="shop cart login image"
+                    alt="shop cart login svg "
                   />
                 </picture>
               </div>
