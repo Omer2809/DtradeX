@@ -1,5 +1,6 @@
 {
   "name": "dtradex",
+  "homepage": "https://Omer2809.github.io/DtradeX",
   "version": "0.2.0",
   "private": true,
   "dependencies": {
@@ -9,6 +10,7 @@
     "antd": "^4.15.1",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
+    "gh-pages": "^3.2.0",
     "joi-browser": "^13.4.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.20",
@@ -25,6 +27,8 @@
     "styled-components": "^5.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
