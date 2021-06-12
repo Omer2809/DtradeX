@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin: auto;
   max-width: 850px;
   padding: 20px;
-  padding-top: 70px;
+  padding-top: 100px;
   @media (max-width: 880px) {
     /* margin: 20px auto 35px; */
   }
