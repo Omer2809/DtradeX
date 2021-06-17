@@ -20,7 +20,7 @@ This is the Web version of my Application.
 * Product search feature.
 
 ##	Technologies Used
-* Expo, React Native, Apisauce, Fromik, yup, Styled Components, Bootstrap, Node.js, Express, MongoDb, joi, jwt, Winston.
+*  React, Axios, Joi, JWT, Styled Components, Bootstrap, Node.js, Express, MongoDb, joi, jwt, Winston.
 
 ## Usage
 ### ES Modules in Node
