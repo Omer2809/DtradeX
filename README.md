@@ -3,7 +3,7 @@
 
 This is the Web version of my Application.
 
-[<img src="https://res.cloudinary.com/deqjuoahl/image/upload/v1623940038/homepage-dtradex.png" alt="Home page of DtradeX" />]( "home page")
+<img src="https://res.cloudinary.com/deqjuoahl/image/upload/v1623940038/homepage-dtradex.png" alt="Home page of DtradeX" />
 
 
 
