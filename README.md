@@ -1,9 +1,9 @@
-# [DtradeX](https://dtradex.netlify.app/)
+# [DtradeX](https://dtradex-omer2809.vercel.app/)
 >	It's a  platform to buy or sell anything that you don't need any more.
 
 This is the Web version of my Application.
 
-<img src="https://res.cloudinary.com/deqjuoahl/image/upload/v1623940038/homepage-dtradex.png" alt="Home page of DtradeX" />
+[<img src="https://res.cloudinary.com/deqjuoahl/image/upload/v1623940038/homepage-dtradex.png" alt="Home page of DtradeX" />](https://dtradex-omer2809.vercel.app/)
 
 
 
